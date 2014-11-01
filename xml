@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<person type="individual">
+	<firstName>John</firstName>
+	<lastName>Smith</lastName>
+	<dateOfBirth>Wed Aug 26 1964 00:00:00 GMT+0800 (CST)</dateOfBirth>
+	<address type="home">
+		<streetAddress>3212 22nd St</streetAddress>
+		<city>Chicago</city>
+		<state>Illinois</state>
+		<zip>10000</zip>
+	</address>
+	<phone type="home">123-555-4567</phone>
+	<phone type="cell">456-555-7890</phone>
+	<email>john@smith.com</email>
+	<notes>John&apos;s profile is not complete.</notes>
+</person>

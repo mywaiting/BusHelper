@@ -1,0 +1,40 @@
+{
+  "name": "BusHelper",
+  "version": "0.0.1",
+  "description": "肇庆公交微信助手",
+  "main": "app.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cyrilzhao/BusHelper.git"
+  },
+  "keywords": [
+    "bus",
+    "wechat"
+  ],
+  "author": "cyrilzhao",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/cyrilzhao/BusHelper/issues"
+  },
+  "homepage": "https://github.com/cyrilzhao/BusHelper",
+  "dependencies": {
+    "jade": "~1.3.0",
+    "morgan": "~1.0.0",
+    "express": "~4.10.1",
+    "body-parser": "~1.0.0",
+    "static-favicon": "~1.0.0",
+    "js2xmlparser": "~0.1.5"
+  },
+  "devDependencies": {
+    "grunt-simple-mocha": "~0.4.0",
+    "grunt": "~0.4.5",
+    "grunt-nodemon": "~0.3.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-concurrent": "~1.0.0",
+    "supertest": "~0.13.0",
+    "chai": "~1.9.1"
+  }
+}
