@@ -4,6 +4,15 @@ chai.should()
 app = require "../app.coffee"
 request = (require "supertest")(app)
 
+str =   "<xml>" +
+            "<ToUserName><![CDATA[randomplayer]]></ToUserName>" +
+            "<FromUserName><![CDATA[owWqluO0UiXVM0oBIDcDXF-TPYfs]]></FromUserName>" + 
+            "<CreateTime>1348831860</CreateTime>" +
+            "<MsgType><![CDATA[text]]></MsgType>" +
+            "<Content><![CDATA[this is a test]]></Content>" +
+            "<MsgId>1234567890123456</MsgId>" +
+        "</xml>";
+
 describe "测试解析和生成xml", ->
     before (done)->
         done()
@@ -12,60 +21,12 @@ describe "测试解析和生成xml", ->
 
     describe "测试解析xml：", ->
         it "解析xml", (done)->
-            request.post("/tags")
+            request.post("/")
+                   .set("Content-Type", "text/xml")
                    .expect(200)
-                   .set('cookie', cookie)
-                   .send({name: "nodejs", appId: testAppId})
+                   .send(str)
                    .end (err, res)->
+                        
                         done()
 
-        it "管理员为应用一新增一个Tag，Tag名称为< 企业招聘 >", (done)->
-            request.post("/tags")
-                   .expect(200)
-                   .set('cookie', cookie)
-                   .send({name: "企业招聘", appId: testAppId})
-                   .end (err, res)->
-                        done()
-
-        it "管理员为应用二新增一个Tag，Tag名称为< php >", (done)->
-            request.post("/tags")
-                   .expect(200)
-                   .set('cookie', cookie)
-                   .send({name: "php", appId: testAppId_1})
-                   .end (err, res)->
-                        done()
-
-        it "管理员为应用二新增一个Tag，Tag名称为< 企业招聘 >", (done)->
-            request.post("/tags")
-                   .expect(200)
-                   .set('cookie', cookie)
-                   .send({name: "企业招聘", appId: testAppId_1})
-                   .end (err, res)->
-                        done()
-    
-    describe "管理员发布应用", ->
-        it "发布应用二", (done)->
-            request.put("/rabbitpres/#{testAppId_1}")
-                   .expect(200)
-                   .set('cookie', cookie)
-                   .send({isPublish: true, cols: JSON.stringify(["isPublish"])})
-                   .end (err, res)->
-                        done()
-
-        it "发布应用一", (done)->
-            request.put("/rabbitpres/#{testAppId}")
-                   .expect(200)
-                   .set('cookie', cookie)
-                   .send({isPublish: true, cols: JSON.stringify(["isPublish"])})
-                   .end (err, res)->
-                        done()
-
-    describe "管理员获取应用列表", ->
-        it "管理员获取按照时间排序后的应用信息列表", (done)->
-            request.get("/admin")
-                   .expect(200)
-                   .set('cookie', cookie)
-                   .end (err, res)->
-                        done()
-                    
-
+      
