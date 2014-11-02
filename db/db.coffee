@@ -11,11 +11,9 @@ opts = {
     }
 }
 
-orm.connect opts, (err, db)->
-    console.log err
-    console.log "db"
-    console.log db
-    console.log orm.db
+orm.connect "mysql://bushelper:zhaojian@localhost/bushelper", (err, db)->
+    if err
+        console.log err
 
 module.exports = {
 
