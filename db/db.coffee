@@ -1,20 +1,17 @@
 orm = require 'orm' 
+events = require "events"
 
-opts = {
-    database: "bushelper" 
-    protocol: "mysql" 
-    host: "127.0.0.1" 
-    username: "bushelper" 
-    password: "zhaojian" 
-    query: {
-        pool: true
-    }
-}
+class DB extends events.EventEmitter
+    constructor: ()->
+        self = this
 
-orm.connect "mysql://bushelper:zhaojian@localhost/bushelper", (err, db)->
-    if err
-        console.log err
+        orm.connect "mysql://bushelper:zhaojian@localhost/bushelper", (err, db)->
+            if err
+                console.log err
+            self.db = db
+            self.emit "db-connected", db
 
-module.exports = {
+    getInstance: ()->
+        return this.db
 
-}
+module.exports = new DB()
