@@ -7,6 +7,7 @@ bodyParser = require 'body-parser'
 
 router = require './routes/index.coffee'
 utils = require './businesses/utils'
+db = require './db/db.coffee'
 
 # 让express接收xml形式的POST请求
 xmlBodyParser = (req, res, next)->

@@ -1,10 +1,24 @@
 js2xmlparser = require "js2xmlparser"
-utils = require "./utils"
+utils = require "../utils"
 
-class Index
+StationModel = require '../../db/models/station'
+
+class Station
     constructor: ()->
+
+    getStationPos: ()->
+        console.log "hello"
+
+    addStationPos: ()->
+        
+
+    updateStationPos: ()->
+        console.log "hello"
+
+    deleteStaionPos: ()->
+        console.log "hello"
     
-    jsonToXml: (xmlStr, callback)->
+    jsonToXml: ()->
         data = {
             "ToUserName": "<![CDATA[owWqluO0UiXVM0oBIDcDXF-TPYfs]]>",
             "FromUserName": "<![CDATA[CyrilZhao]]>",
@@ -17,4 +31,4 @@ class Index
 
         return utils.xmlFilter xml
 
-module.exports = Index
+module.exports = Station
