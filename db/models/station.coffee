@@ -12,7 +12,7 @@ Station = schema.define('Station', {
     },
     primaryKeys: ["name", "lat"],
     foreignKeys: [{
-        name: "name",
+        localCol: "name",
         foreignTable: "user",
         foreignCol: "username",
         onDelete: true,
