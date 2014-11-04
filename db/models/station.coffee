@@ -1,23 +1,27 @@
-DB = require "../db.coffee"
+schema = require "../db.coffee"
 
+Station = schema.define('Station', {
+    name: {type: schema.String, limit: 255, allowNull: false, index: true},
+    lat: {type: schema.String, limit: 255, allowNull: false},
+    lng: {type: schema.String, limit: 255, allowNull: false}
+}, {
+    indexes: {
+        index1: {
+            columns: 'email, createdByAdmin'
+        }
+    },
+    primaryKeys: ["name", "lat"],
+    foreignKeys: [{
+        name: "name",
+        foreignTable: "user",
+        foreignCol: "username",
+        onDelete: true,
+        onUpdate: true
+    }]
+});
 
-class Station
-    constructor: ()->
-        self = this
-        DB.on "db-connected", (db)->
-            self.defineModel db
+schema.autoupdate (err)->
+    if err
+        console.log ""
 
-    defineModel: (db)->
-        stationModel = db.define('station', {
-            name: String
-            lat: String
-            lng: String
-        })
-        this.model = stationModel
-
-    getModel: ()->
-        return this.model
-
-station = new Station()
-
-module.exports = station
+module.exports = Station

@@ -10,11 +10,11 @@ class Station
         console.log "hello"
 
     addStationPos: (success_cb, fail_cb)->
-        stationModel = StationModel.getModel()
-        stationModel.create [{name: "肇庆体育中心", lat: "40.056878", lng: "116.30815"}], (err, items)->
+        params = {name: "体育中心", lat: "40.056878", lng: "116.30815"}
+        StationModel.create params, (err, station)->
             if err
-                fail_cb err
-            success_cb items
+                fail_cb(err)
+            success_cb(station)
 
     updateStationPos: ()->
         console.log "hello"

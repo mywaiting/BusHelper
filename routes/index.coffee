@@ -8,11 +8,11 @@ Station = require "../businesses/station"
 router.post '/', (req, res)->
 	station = new Station()
 	addStationPosSuccess = (items)->
-		console.log items
+		res.end()
 	addStationPosFail = (err)->
-		console.log console.log err
+		res.end()
 
 	station.addStationPos addStationPosSuccess, addStationPosFail
-	res.end()
+	
 
 module.exports = router
