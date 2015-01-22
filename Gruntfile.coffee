@@ -7,24 +7,17 @@ module.exports = (grunt)->
                 options: 
                     logConcurrentOutput: true
 
-        simplemocha: 
-            options: 
-                compilers: "coffee:coffee-script"
-            all: {src: ["test/**/*.coffee"]}
+        simplemocha:
+            all: {src: ["test/**/*.js"]}
 
         watch: 
             dev:
-                files: ["**/*.coffee"]
-                #tasks: ["simplemocha"]
+                files: ["**/*.js"]
+                tasks: ["simplemocha"]
 
         nodemon:
             dev: 
-                script: "index.coffee"
-                options:
-                    ext: "js,coffee"
-                    debug: true
-                    env:
-                        DEBUG: "Bus-Helper"
+                script: "index.js"
 
 
     grunt.loadNpmTasks 'grunt-simple-mocha'
