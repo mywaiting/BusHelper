@@ -12,23 +12,7 @@ var utils = require("../businesses/utils");
 //var Station = require("../businesses/station");
 
 router.get('/',function(req,res){
-    var options = {
-        hostname :'api.map.baidu.com',
-        path:'/place/v2/search?query=公交站&region=广州&output=json&scope=1&ak=T1E0HUvqvtFAsQMlP5il4ZgE',
-        method:'GET'
-    };
-    var request = http.request(options,function(response){
-        console.log('状态码:' + response.statusCode);
-        var str = "";
-        response.setEncoding('utf8');
-        response.on('data',function(data){
-            str += data;
-        });
-        response.on('end',function(){
-            res.end(str);
-        });
-    });
-    request.end();
+    res.write(req.echostr );
 });
 
 router.post('/',function(req, res){
