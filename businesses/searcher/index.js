@@ -17,21 +17,7 @@ Searcher.searchStation = function(json,callback){
             path:path,
             method:'GET'
         };
-        var str = "";
-        var request = http.request(options,function(response){
-            if(response.statusCode == 200){
-                response.setEncoding('utf-8');
-                response.on('data',function(data){
-                    str += data;
-                });
-                response.on('end',function(){
-                    callback(null,str);
-                });
-            }else{
-                callback(new Error('出现错误!'));
-            }
-        });
-        request.end();
+        utils.requestBaidu(options,callback);
     }else{
         callback(new Error('出现错误!'));
     }
@@ -64,6 +50,25 @@ Searcher.responseStation = function(req,data){
     };
     var xml = utils.js2xml(responseJson);
     return xml;
+};
+
+Searcher.direct = function(json,callback){
+    var index = json.Content.indexOf("到");
+    if(typeof(json) == 'object' && index > 0 && index < json.Content.length){
+       var origin = json.Content.slice(0,index);
+       var destination = json.Content.slice(index + 1,json.Content.length);
+       var path = url.baidu.directionPath;
+        path = path.replace('ORIGIN',origin);
+        path = path.replace('DESTINATION',destination);
+        var options = {
+            hostname :url.baidu.hostname,
+            path:path,
+            method:'GET'
+        };
+        utils.requestBaidu(options,callback);
+    }else{
+       callback(new Error("出现错误!"));
+    }
 };
 
 module.exports = Searcher;

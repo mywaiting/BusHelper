@@ -2,7 +2,7 @@
  * Created by root on 15-1-21.
  */
 var js2xmlparser = require("js2xmlparser");
-
+var http = require('http');
 function Utils(){}
 
 Utils.xmlFilter = function(xmlStr){
@@ -42,6 +42,24 @@ Utils.js2xml = function(json){
     var replacement = xml.slice(xml.indexOf('<CreateTime>') + 21,xml.indexOf('</CreateTime>') - 3);
     xml = xml.replace(substr,replacement);
     return xml;
+};
+
+Utils.requestBaidu = function(options,callback){
+    var str = "";
+    var request = http.request(options,function(response){
+        if(response.statusCode == 200){
+            response.setEncoding('utf-8');
+            response.on('data',function(data){
+                str += data;
+            });
+            response.on('end',function(){
+                callback(null,str);
+            });
+        }else{
+            callback(new Error('出现错误!'));
+        }
+    });
+    request.end();
 };
 
 module.exports = Utils;

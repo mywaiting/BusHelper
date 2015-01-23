@@ -13,7 +13,7 @@ var str =   "<xml>" +
     "<FromUserName><![CDATA[owWqluO0UiXVM0oBIDcDXF-TPYfs]]></FromUserName>" +
     "<CreateTime>1348831860</CreateTime>" +
     "<MsgType><![CDATA[text]]></MsgType>" +
-    "<Content><![CDATA[this is a test]]></Content>" +
+    "<Content><![CDATA[肇庆学院到肇庆体育中心]]></Content>" +
     "<MsgId>1234567890123456</MsgId>" +
     "</xml>";
 
@@ -41,7 +41,7 @@ var location = "<xml>" +
     "</SendLocationInfo>" +
     "</xml>";
 
-describe("测试解析和生成xml",function(){
+describe("测试:",function(){
     before(function(done){
         done();
     });
@@ -49,7 +49,7 @@ describe("测试解析和生成xml",function(){
         done();
     });
 
-    describe("测试解析xml：",function(){
+    describe("测试查找公交站",function(){
         it("解析xml",function(done){
             request.post("/")
                 .set("Content-Type", "text/xml")
@@ -61,17 +61,18 @@ describe("测试解析和生成xml",function(){
             })
         });
     });
-
-    describe("测试生成xml:",function(){
-        it("生成xml",function(done){
-            var xml = utils.js2xml(json);
-            if(xml){
-                //console.log(xml);
-                done();
-            }else{
-                throw new error("生成xml失败!");
-            }
+    describe("测试导航",function(){
+        it("解析xml",function(done){
+            request.post("/")
+                .set("Content-Type", "text/xml")
+                .expect(200)
+                .send(str)
+                .end(function(err,res){
+                    console.log(res.res.text);
+                    done(err);
+                })
         });
     });
+
 });
 
