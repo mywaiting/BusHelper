@@ -32,7 +32,7 @@ var location = "<xml>" +
     "<CreateTime>1408091189</CreateTime>" +
     "<MsgType><![CDATA[event]]></MsgType>" +
     "<Event><![CDATA[location_select]]></Event>" +
-    "<EventKey><![CDATA[6]]></EventKey>" +
+    "<EventKey><![CDATA[searchStation]]></EventKey>" +
     "<SendLocationInfo><Location_X><![CDATA[23]]></Location_X>" +
     "   <Location_Y><![CDATA[113]]></Location_Y>" +
     "   <Scale><![CDATA[15]]></Scale>" +
@@ -56,7 +56,8 @@ describe("测试解析和生成xml",function(){
                 .expect(200)
                 .send(location)
                 .end(function(err,res){
-                done();
+                console.log(res.res.text);
+                done(err);
             })
         });
     });
@@ -65,7 +66,7 @@ describe("测试解析和生成xml",function(){
         it("生成xml",function(done){
             var xml = utils.js2xml(json);
             if(xml){
-                console.log(xml);
+                //console.log(xml);
                 done();
             }else{
                 throw new error("生成xml失败!");
@@ -74,16 +75,3 @@ describe("测试解析和生成xml",function(){
     });
 });
 
-describe("测试用户查找附近公交站:",function(){
-    describe("测试开始:",function(){
-        it("开始:",function(done){
-            request.post('/searchStation')
-                .set("Content-Type", "text/xml")
-                .expect(200)
-                .send(location)
-                .end(function(err,res){
-                    done();
-                })
-        });
-    });
-});

@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 
 var router = require('./routes/index.js');
 var utils = require('./businesses/utils');
-var DB = require('./db/db.js');
+//var DB = require('./db/db.js');
 
 var xmlBodyParser = function(req,res,next){
     if(req._body){

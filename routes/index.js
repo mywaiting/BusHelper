@@ -12,20 +12,37 @@ var utils = require("../businesses/utils");
 //var Station = require("../businesses/station");
 
 router.get('/',function(req,res){
-    res.write(req.echostr );
+    console.log(req.query);
+    res.end(req.query.echostr);
 });
 
 router.post('/',function(req, res){
-    //console.log(req.body);
-    //var station = new Station();
-    var addStationPosSuccess = function(items){
-        res.end();
-    };
-    var addStationPosFail = function(err){
-        res.end();
-    };
-    //station.addStationPos(addStationPosSuccess,addStationPosFail);
-    res.end();
+    switch(req.body.MsgType){
+        case 'event':
+            switch(req.body.EventKey){
+                case 'searchStation':
+                    searcher.searchStation(req.body,function(err,data){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            console.log('hello world');
+                            console.log(searcher.responseStation(req,data));
+                            res.end(searcher.responseStation(req,data));
+                        }
+                    });
+                    break;
+                default :
+                    console.log('error2');
+                    break;
+            }
+            break;
+        case 'text':
+            console.log('text');
+            break;
+        default :
+            console.log('error');
+            break;
+    }
 });
 
 router.post('/searchStation',function(req,res){
@@ -58,7 +75,6 @@ router.post('/searchStation',function(req,res){
             MsgType:'text',
             Content:content
         };
-       // console.log(utils.js2xml(responseJson));
         res.end(utils.js2xml(responseJson));
     });
 });
