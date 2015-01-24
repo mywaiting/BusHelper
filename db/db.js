@@ -4,13 +4,10 @@
 var caminte = require('caminte');
 var Schema = caminte.Schema;
 var config = {
-    driver     : "mysql",
+    driver     : "redis",
     host       : "localhost",
-    port       : "3306",
-    username   : "root",
-    password   : "1234",
-    database   : "bushelper",
-    pool       : false
+    port       : "6379"
 };
 
-module.exports = new Schema(config.driver, config);
+var schema = new Schema(config.driver, config);
+module.exports = schema;

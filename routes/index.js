@@ -1,15 +1,11 @@
 /**
  * Created by root on 15-1-21.
  */
-//var xmlDigester = require("xml-digester");
+
 var express = require('express');
 var router = express.Router();
-//var fs = require("fs");
-var http = require('http');
 var searcher = require("../businesses/searcher");
-var utils = require("../businesses/utils");
-
-//var Station = require("../businesses/station");
+var User = require("../businesses/user");
 
 router.get('/',function(req,res){
     res.end(req.query.echostr);
@@ -18,8 +14,8 @@ router.get('/',function(req,res){
 router.post('/',function(req, res){
     switch(req.body.MsgType){
         case 'event':
-            switch(req.body.EventKey){
-                case 'searchStation':
+            switch(req.body.Event){
+                case 'location_select':
                     searcher.searchStation(req.body,function(err,data){
                         if(err){
                             res.end(err);
@@ -28,8 +24,19 @@ router.post('/',function(req, res){
                         }
                     });
                     break;
+                case 'LOCATION':
+                    var json = {
+                        name:req.body.FromUserName,
+                        latitude:req.body.Latitude,
+                        longitude:req.body.Longitude
+                    };
+                    var user = new User();
+                    user.addUser(json,function(err){
+                        console.log(err);
+                        res.end();
+                    });
                 default :
-                    console.log('error2');
+                    res.end();
                     break;
             }
             break;

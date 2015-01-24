@@ -26,6 +26,17 @@ var json = {
     MsgId: '1234567890123456'
 };
 
+var userLocation = "<xml>" +
+    "<ToUserName><![CDATA[gh_e136c6e50636]]></ToUserName>" +
+    "<FromUserName><![CDATA[oMgHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
+    "<CreateTime>1408091189</CreateTime>" +
+    "<MsgType><![CDATA[event]]></MsgType>" +
+    "<Event><![CDATA[LOCATION]]></Event>" +
+    "<Latitude>23.137466</Latitude>" +
+    "<Longitude>113.352425</Longitude>" +
+    "<Precision>119.385040</Precision>" +
+    "</xml>";
+
 var location = "<xml>" +
     "<ToUserName><![CDATA[gh_e136c6e50636]]></ToUserName>" +
     "<FromUserName><![CDATA[oMgHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
@@ -73,6 +84,16 @@ describe("测试:",function(){
                 })
         });
     });
-
+    describe("测试更新用户位置:",function(){
+        it("测试开始:",function(done){
+            request.post("/")
+                .set("Content-Type","text/xml")
+                .expect(200)
+                .send(userLocation)
+                .end(function(err,res){
+                    done(err);
+                });
+        });
+    });
 });
 

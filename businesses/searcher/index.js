@@ -2,8 +2,8 @@
  * Created by root on 15-1-22.
  */
 var url = require("../../db/models/url");
-var http = require('http');
-var utils = require('../utils');
+var utils = require("../utils");
+var response = require('../response');
 
 function Searcher(){};
 
@@ -40,15 +40,7 @@ Searcher.responseStation = function(req,data){
             }
         }
     }
-    var createTime = new Date().getTime();
-    var responseJson = {
-        ToUserName: req.body.FromUserName,
-        FromUserName: req.body.ToUserName,
-        CreateTime: createTime,
-        MsgType: 'text',
-        Content: content
-    };
-    var xml = utils.js2xml(responseJson);
+    var xml = response.responseText(req,content);
     return xml;
 };
 
