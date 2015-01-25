@@ -79,7 +79,6 @@ Searcher.search = function(json,callback){
                 path = path.replace('location_X',doc.latitude);
                 path = path.replace('location_Y',doc.longitude);
                 path = path.replace('QUERY',query);
-                console.log(path);
                 var options = {
                     hostname :url.baidu.hostname,
                     path:path,
@@ -90,6 +89,27 @@ Searcher.search = function(json,callback){
         });
     }else{
        callback(new Error("出现错误!"));
+    }
+};
+
+Searcher.responseSearch = function(req,data){
+    var content = new Array();
+    var query = req.body.Content.slice(2);
+    var item = {
+        Title:"查询结果",
+        Description:"",
+        PicUrl:"",
+        Url:""
+    }
+    content.push(item);
+    for(var index in data){
+        var item = {
+          Title:data[index].name + ":/n" + data[index].address,
+          Description:"",
+          PicUrl:"",
+          Url:""
+        };
+        content.push(item);
     }
 };
 
