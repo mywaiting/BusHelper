@@ -31,10 +31,15 @@ router.post('/',function(req, res){
                         longitude:req.body.Longitude
                     };
                     var user = new User();
-                    user.addUser(json,function(err){
-                        console.log(err);
+                    user.addUser(json,function(err,doc){
+                        if(err){
+                            console.log(err);
+                        }else{
+                            console.log(doc);
+                        }
                         res.end();
                     });
+                    break;
                 default :
                     res.end();
                     break;

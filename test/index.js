@@ -32,7 +32,7 @@ var userLocation = "<xml>" +
     "<CreateTime>1408091189</CreateTime>" +
     "<MsgType><![CDATA[event]]></MsgType>" +
     "<Event><![CDATA[LOCATION]]></Event>" +
-    "<Latitude>23.137466</Latitude>" +
+    "<Latitude>33.137466</Latitude>" +
     "<Longitude>113.352425</Longitude>" +
     "<Precision>119.385040</Precision>" +
     "</xml>";
@@ -91,6 +91,7 @@ describe("测试:",function(){
                 .expect(200)
                 .send(userLocation)
                 .end(function(err,res){
+                    console.log(res.res.text);
                     done(err);
                 });
         });
