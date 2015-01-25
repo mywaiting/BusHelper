@@ -4,6 +4,7 @@
 var url = require("../../db/models/url");
 var utils = require("../utils");
 var response = require('../response');
+var user = require('../user');
 
 function Searcher(){};
 
@@ -12,6 +13,7 @@ Searcher.searchStation = function(json,callback){
         var path = url.baidu.searcherPath;
         path = path.replace('location_X',json.SendLocationInfo.Location_X);
         path = path.replace('location_Y',json.SendLocationInfo.Location_Y);
+        path = path.replace('QUERY','公交站');
         var options = {
             hostname :url.baidu.hostname,
             path:path,
@@ -46,7 +48,7 @@ Searcher.responseStation = function(req,data){
 
 Searcher.direct = function(json,callback){
     var index = json.Content.indexOf("到");
-    if(typeof(json) == 'object' && index > 0 && index < json.Content.length){
+    if(typeof(json) == 'object' && index > 0 && index < json.Content.length - 1){
        var origin = json.Content.slice(0,index);
        var destination = json.Content.slice(index + 1,json.Content.length);
        var path = url.baidu.directionPath;
@@ -58,6 +60,34 @@ Searcher.direct = function(json,callback){
             method:'GET'
         };
         utils.requestBaidu(options,callback);
+    }else{
+       callback(new Error("出现错误!"));
+    }
+};
+
+Searcher.search = function(json,callback){
+    var name = json.FromUserName;
+    var content = json.Content;
+    var index = content.indexOf('附近');
+    if(typeof(json) == 'object' && index == 0 && index < content.length - 2){
+        user.getUser(name,function(err,doc){
+            if(err){
+                callback(err);
+            }else{
+                var path = url.baidu.searcherPath;
+                var query = content.slice(2,content.length);
+                path = path.replace('location_X',doc.latitude);
+                path = path.replace('location_Y',doc.longitude);
+                path = path.replace('QUERY',query);
+                console.log(path);
+                var options = {
+                    hostname :url.baidu.hostname,
+                    path:path,
+                    method:'GET'
+                };
+                utils.requestBaidu(options,callback);
+            }
+        });
     }else{
        callback(new Error("出现错误!"));
     }

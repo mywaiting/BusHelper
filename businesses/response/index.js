@@ -31,14 +31,14 @@ response.responseNews = function(req,data){
             "</item>\n";
     }
     xml += "<item>\n" +
-        "<Title><![CDATA[]]></Title>\n" +
-        "<Description><![CDATA[附近街景]]></Description>\n" +
+        "<Title><![CDATA[附近街景]]></Title>\n" +
+        "<Description><![CDATA[]]></Description>\n" +
         "<PicUrl><![CDATA[picurl]]></PicUrl>\n" +
         "<Url><![CDATA[url]]></Url>\n" +
         "</item>\n" +
         "<item>\n" +
-        "<Title><![CDATA[]]></Title>\n" +
-        "<Description><![CDATA[附近地图]]></Description>\n" +
+        "<Title><![CDATA[附近地图]]></Title>\n" +
+        "<Description><![CDATA[]]></Description>\n" +
         "<PicUrl><![CDATA[picurl]]></PicUrl>\n" +
         "<Url><![CDATA[url]]></Url>\n" +
         "</item>\n" +

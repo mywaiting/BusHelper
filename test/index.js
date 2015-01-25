@@ -10,10 +10,10 @@ var utils = require('../businesses/utils');
 
 var str =   "<xml>" +
     "<ToUserName><![CDATA[randomplayer]]></ToUserName>" +
-    "<FromUserName><![CDATA[owWqluO0UiXVM0oBIDcDXF-TPYfs]]></FromUserName>" +
+    "<FromUserName><![CDATA[MogHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
     "<CreateTime>1348831860</CreateTime>" +
     "<MsgType><![CDATA[text]]></MsgType>" +
-    "<Content><![CDATA[肇庆学院到肇庆体育中心]]></Content>" +
+    "<Content><![CDATA[附近酒店]]></Content>" +
     "<MsgId>1234567890123456</MsgId>" +
     "</xml>";
 
@@ -28,11 +28,11 @@ var json = {
 
 var userLocation = "<xml>" +
     "<ToUserName><![CDATA[gh_e136c6e50636]]></ToUserName>" +
-    "<FromUserName><![CDATA[oMgHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
+    "<FromUserName><![CDATA[MogHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
     "<CreateTime>1408091189</CreateTime>" +
     "<MsgType><![CDATA[event]]></MsgType>" +
     "<Event><![CDATA[LOCATION]]></Event>" +
-    "<Latitude>33.137466</Latitude>" +
+    "<Latitude>23.137466</Latitude>" +
     "<Longitude>113.352425</Longitude>" +
     "<Precision>119.385040</Precision>" +
     "</xml>";
@@ -72,18 +72,7 @@ describe("测试:",function(){
             })
         });
     });
-    describe("测试导航",function(){
-        it("解析xml",function(done){
-            request.post("/")
-                .set("Content-Type", "text/xml")
-                .expect(200)
-                .send(str)
-                .end(function(err,res){
-                    console.log(res.res.text);
-                    done(err);
-                })
-        });
-    });
+
     describe("测试更新用户位置:",function(){
         it("测试开始:",function(done){
             request.post("/")
@@ -94,6 +83,19 @@ describe("测试:",function(){
                     console.log(res.res.text);
                     done(err);
                 });
+        });
+    });
+
+    describe("测试导航",function(){
+        it("解析xml",function(done){
+            request.post("/")
+                .set("Content-Type", "text/xml")
+                .expect(200)
+                .send(str)
+                .end(function(err,res){
+                    console.log(res.res.text);
+                    done(err);
+                })
         });
     });
 });

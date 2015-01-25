@@ -1,18 +1,17 @@
 /**
  * Created by root on 15-1-24.
  */
-
-var User = require('../db/models/user.js');
 var redis = require('redis');
 function DaoUser(){}
 
-DaoUser.setUser = function(json){
+DaoUser.setUser = function(json,callback){
     var client = redis.createClient();
     client.hmset(json.name,{
         "latitude":json.latitude,
         "longitude":json.longitude
-    },function(message){
-        console.log(message);
+    },function(err){
+        client.expire(json.name,600);
+        callback(err);
         client.quit();
     });
 }
@@ -25,12 +24,5 @@ DaoUser.getUser = function(name,callback){
     });
 }
 
-DaoUser.deleteUser = function(name){
-    var client = redis.createClient();
-    client.del(name,function(message){
-        console.log(message);
-        client.quit();
-    });
-}
 
 module.exports = DaoUser;
