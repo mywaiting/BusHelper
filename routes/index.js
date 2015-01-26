@@ -6,6 +6,7 @@ var express = require('express');
 var router = express.Router();
 var searcher = require("../businesses/searcher");
 var User = require("../businesses/user");
+var utils = require("../businesses/utils");
 
 router.get('/',function(req,res){
     res.end(req.query.echostr);
@@ -28,6 +29,7 @@ router.post('/',function(req, res){
                         latitude:req.body.Latitude,
                         longitude:req.body.Longitude
                     };
+                    json = utils.Convert_GCJ02_To_BD09(json);
                     User.setUser(json,function(err){
                         if(err) console.log(err);
                         res.end();

@@ -38,7 +38,6 @@ Searcher.responseSearch = function(data,options){
         "&width=1024&height=1024&zoom=16&markers=" + markers +
         "&labels=" + markers +
         "&labelStyles=" + labels;
-    console.log(url);
     var item = {
         Title:"查询结果",
         Description:"",

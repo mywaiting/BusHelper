@@ -62,4 +62,20 @@ Utils.requestBaidu = function(options,callback){
     request.end();
 };
 
+Utils.Convert_GCJ02_To_BD09 = function(json){
+    var x_pi = 3.14159265358979324 * 3000.0 / 180.0;
+    var x = json.longitude;
+    var y = json.latitude;
+    var z = Math.sqrt(x * x + y * y) + 0.00002 + Math.sin(y * x_pi);
+    var theta = Math.atan2(y,x) + 0.000003 * Math.cos(x * x_pi);
+    var lng = z * Math.cos(theta) + 0.0065;
+    var lat = z * Math.sin(theta) + 0.006;
+    var results = {
+        name:json.name,
+        longitude:lng,
+        latitude:lat
+    };
+    return results;
+};
+
 module.exports = Utils;
