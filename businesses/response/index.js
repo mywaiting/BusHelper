@@ -20,7 +20,7 @@ response.responseNews = function(json,data){
         "<FromUserName><![CDATA[" + json.ToUserName + "]]></FromUserName>\n" +
         "<CreateTime>" + createTime + "</CreateTime>\n" +
         "<MsgType><![CDATA[news]]></MsgType>\n" +
-        "<ArticleCount>" + (2 + data.length) + "</ArticleCount>\n" +
+        "<ArticleCount>" + data.length + "</ArticleCount>\n" +
         "<Articles>\n";
     for(var name in data){
         xml += "<item>\n" +
