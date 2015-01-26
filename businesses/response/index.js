@@ -1,33 +1,33 @@
 function response(){};
 response.responseText = function(req,content){
     var createTime = new Date().getTime();
-    var xml = "<xml>\n" +
-        "<ToUserName><![CDATA[" + req.body.FromUserName +"]]></ToUserName>\n" +
-        "<FromUserName><![CDATA[" + req.body.ToUserName + "]]></FromUserName>\n" +
-        "<CreateTime>" + createTime + "</CreateTime>\n" +
-        "<MsgType><![CDATA[text]]></MsgType>\n" +
-        "<Content><![CDATA[" + content +"]]></Content>\n" +
+    var xml = "<xml>" +
+        "<ToUserName><![CDATA[" + req.body.FromUserName +"]]></ToUserName>" +
+        "<FromUserName><![CDATA[" + req.body.ToUserName + "]]></FromUserName>" +
+        "<CreateTime>" + createTime + "</CreateTime>" +
+        "<MsgType><![CDATA[text]]></MsgType>" +
+        "<Content><![CDATA[" + content +"]]></Content>" +
     "</xml>";
     return xml;
 };
 response.responseNews = function(json,data){
     var createTime = new Date().getTime();
-    var xml = "<xml>\n" +
-        "<ToUserName><![CDATA[" + json.FromUserName +"]]></ToUserName>\n" +
-        "<FromUserName><![CDATA[" + json.ToUserName + "]]></FromUserName>\n" +
-        "<CreateTime>" + createTime + "</CreateTime>\n" +
-        "<MsgType><![CDATA[news]]></MsgType>\n" +
-        "<ArticleCount>" + data.length + "</ArticleCount>\n" +
-        "<Articles>\n";
+    var xml = "<xml>" +
+        "<ToUserName><![CDATA[" + json.FromUserName +"]]></ToUserName>" +
+        "<FromUserName><![CDATA[" + json.ToUserName + "]]></FromUserName>" +
+        "<CreateTime>" + createTime + "</CreateTime>" +
+        "<MsgType><![CDATA[news]]></MsgType>" +
+        "<ArticleCount>" + data.length + "</ArticleCount>" +
+        "<Articles>";
     for(var name in data){
-        xml += "<item>\n" +
-            "<Title><![CDATA[" + data[name].Title + "]]></Title>\n" +
-            "<Description><![CDATA[" + data[name].Description + "]]></Description>\n" +
-            "<PicUrl><![CDATA[" + data[name].PicUrl + "]]></PicUrl>\n" +
-            "<Url><![CDATA["+ data[name].Url + "]]></Url>\n" +
-            "</item>\n";
+        xml += "<item>" +
+            "<Title><![CDATA[" + data[name].Title + "]]></Title>" +
+            "<Description><![CDATA[" + data[name].Description + "]]></Description>" +
+            "<PicUrl><![CDATA[" + data[name].PicUrl + "]]></PicUrl>" +
+            "<Url><![CDATA["+ data[name].Url + "]]></Url>" +
+            "</item>";
     }
-    xml += "</Articles>\n" +
+    xml += "</Articles>" +
         "</xml>";
 
     return xml;
