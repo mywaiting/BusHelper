@@ -1,6 +1,3 @@
-/**
- * Created by root on 15-1-24.
- */
 function response(){};
 response.responseText = function(req,content){
     var createTime = new Date().getTime();
