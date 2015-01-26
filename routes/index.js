@@ -12,21 +12,14 @@ router.get('/',function(req,res){
 });
 
 router.post('/',function(req, res){
+    console.log(req.body);
     switch(req.body.MsgType){
         case 'event':
             //用户触发事件
             switch(req.body.Event){
                 case 'location_select':
                     //自定义菜单上报位置的事件
-                    searcher.searchStation(req.body,function(err,data){
-                        if(err){
-                            console.log(err);
-                            res.end();
-                        }else{
-                            console.log(searcher.responseStation(req,data));
-                            res.end();
-                        }
-                    });
+                    res.end();
                     break;
                 case 'LOCATION':
                     //用户自动上报位置的事件
