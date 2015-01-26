@@ -70,8 +70,6 @@ Utils.Convert_GCJ02_To_BD09 = function(json){
     var theta = Math.atan2(y,x) + 0.000003 * Math.cos(x * x_pi);
     var lng = z * Math.cos(theta) + 0.0065;
     var lat = z * Math.sin(theta) + 0.006;
-    console.log("lng:" + lng);
-    console.log("lat:" + lat);
     var results = {
         name:json.name,
         longitude:lng,

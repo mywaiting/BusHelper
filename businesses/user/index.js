@@ -15,31 +15,24 @@ DaoUser.setUser = function(json,callback){
         path:path,
         method:'GET'
     };
-    console.log(path);
     utils.requestBaidu(options,function(err,str){
         if(err) callback(err);
         else{
             var data = JSON.parse(str);
-            if(data.status == 0){
-                data = data.result[0];
-                json.longitude = data.x;
-                json.latitude = data.y;
-                console.log(json);
-                var client = redis.createClient();
-                client.hmset(json.name,{
-                    "latitude":json.latitude,
-                    "longitude":json.longitude
-                },function(err){
-                    client.expire(json.name,600);
-                    callback(err);
-                    client.quit();
-                });
-            }else{
-                callback('error');
-            }
+            data = data.result[0];
+            json.longitude = data.x;
+            json.latitude = data.y;
+            var client = redis.createClient();
+            client.hmset(json.name,{
+                "latitude":json.latitude,
+                "longitude":json.longitude
+            },function(err){
+                client.expire(json.name,600);
+                callback(err);
+                client.quit();
+            });
         }
     });
-
 }
 
 DaoUser.getUser = function(name,callback){
