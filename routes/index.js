@@ -71,15 +71,7 @@ router.post('/',function(req, res){
                         console.log(err);
                         res.end();
                     }else{
-                        data = JSON.parse(data);
-                        if(data.status == 0){
-                            var results = data.results;
-                            searcher.responseSearch(req,results);
-                            console.log(results);
-                        }else{
-                            console.log('查询出错!');
-                        }
-                        res.end();
+                        res.end(data);
                     }
                 });
             }

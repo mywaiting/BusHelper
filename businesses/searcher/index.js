@@ -65,6 +65,43 @@ Searcher.direct = function(json,callback){
     }
 };
 
+Searcher.responseSearch = function(data,options){
+    var content = new Array();
+    var markers = "";
+    var flag = true;
+    for(var index in data){
+        var item = {
+            Title:data[index].name + ":/n" + data[index].address,
+            Description:"",
+            PicUrl:"",
+            Url:""
+        };
+        if(flag) flag = false;
+        else markers += "|";
+        markers += data[index].location.lng + "," + data[index].location.lat;
+        content.push(item);
+    }
+    var picurl = "http://api.map.baidu.com/staticimage?center=" +
+        options.longitude +
+        "," +
+        options.latitude +
+        "&width=640&height=320&zoom=17&markers=" + markers;
+    var url = "http://api.map.baidu.com/staticimage?center=" +
+        options.longitude +
+        "," +
+        options.latitude +
+        "&width=1024&height=1024&zoom=17&markers=" + markers;
+    var item = {
+        Title:"查询结果",
+        Description:"",
+        PicUrl:picurl,
+        Url:url
+    };
+    content.push(item);
+    content = content.reverse();
+    return content;
+};
+
 Searcher.search = function(json,callback){
     var name = json.FromUserName;
     var content = json.Content;
@@ -84,7 +121,25 @@ Searcher.search = function(json,callback){
                     path:path,
                     method:'GET'
                 };
-                utils.requestBaidu(options,callback);
+                utils.requestBaidu(options,function(err,str){
+                    if(err){
+                        callback(err);
+                    }else{
+                        var data = JSON.parse(str);
+                        if(data.status == 0){
+                            var results = data.results;
+                            var options = {
+                                latitude:doc.latitude,
+                                longitude:doc.longitude
+                            };
+                            var content = Searcher.responseSearch(results,options);
+                            var xml = response.responseNews(json,content);
+                            callback(null,xml);
+                        }else{
+                            callback(data.message);
+                        }
+                    }
+                });
             }
         });
     }else{
@@ -92,25 +147,6 @@ Searcher.search = function(json,callback){
     }
 };
 
-Searcher.responseSearch = function(req,data){
-    var content = new Array();
-    var query = req.body.Content.slice(2);
-    var item = {
-        Title:"查询结果",
-        Description:"",
-        PicUrl:"",
-        Url:""
-    }
-    content.push(item);
-    for(var index in data){
-        var item = {
-          Title:data[index].name + ":/n" + data[index].address,
-          Description:"",
-          PicUrl:"",
-          Url:""
-        };
-        content.push(item);
-    }
-};
+
 
 module.exports = Searcher;

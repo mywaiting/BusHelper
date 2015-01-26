@@ -13,11 +13,11 @@ response.responseText = function(req,content){
     "</xml>";
     return xml;
 };
-response.responseNews = function(req,data){
+response.responseNews = function(json,data){
     var createTime = new Date().getTime();
     var xml = "<xml>\n" +
-        "<ToUserName><![CDATA[" + req.body.FromUserName +"]]></ToUserName>\n" +
-        "<FromUserName><![CDATA[" + req.body.ToUserName + "]]></FromUserName>\n" +
+        "<ToUserName><![CDATA[" + json.FromUserName +"]]></ToUserName>\n" +
+        "<FromUserName><![CDATA[" + json.ToUserName + "]]></FromUserName>\n" +
         "<CreateTime>" + createTime + "</CreateTime>\n" +
         "<MsgType><![CDATA[news]]></MsgType>\n" +
         "<ArticleCount>" + (2 + data.length) + "</ArticleCount>\n" +
@@ -30,19 +30,7 @@ response.responseNews = function(req,data){
             "<Url><![CDATA["+ data[name].Url + "]]></Url>\n" +
             "</item>\n";
     }
-    xml += "<item>\n" +
-        "<Title><![CDATA[附近街景]]></Title>\n" +
-        "<Description><![CDATA[]]></Description>\n" +
-        "<PicUrl><![CDATA[picurl]]></PicUrl>\n" +
-        "<Url><![CDATA[url]]></Url>\n" +
-        "</item>\n" +
-        "<item>\n" +
-        "<Title><![CDATA[附近地图]]></Title>\n" +
-        "<Description><![CDATA[]]></Description>\n" +
-        "<PicUrl><![CDATA[picurl]]></PicUrl>\n" +
-        "<Url><![CDATA[url]]></Url>\n" +
-        "</item>\n" +
-        "</Articles>\n" +
+    xml += "</Articles>\n" +
         "</xml>";
 
     return xml;
