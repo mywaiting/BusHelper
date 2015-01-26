@@ -81,7 +81,11 @@ Searcher.responseSearch = function(data,options){
         markers += data[index].location.lng + "," + data[index].location.lat;
         content.push(item);
     }
-    var picurl = "http://www.huaqiangzdb.com/img/aHR0cDovL3BpYy5zdWNhaWJhci5jb20vcGljLzIwMTMwNS8yOS8xNDNiOGNhNzk2LmpwZw==.jpg";
+    var picurl = "http://api.map.baidu.com/staticimage?center=" +
+        options.longitude +
+        "," +
+        options.latitude +
+        "&width=640&height=320&zoom=17&markers=" + markers;
     var url = "http://api.map.baidu.com/staticimage?center=" +
         options.longitude +
         "," +
