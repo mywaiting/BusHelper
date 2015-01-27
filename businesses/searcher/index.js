@@ -21,12 +21,13 @@ Searcher.responseSearch = function(data,options){
         var destination = data[index].location.lat + "," + data[index].location.lng;
         var purl = path.replace("DESTINATION",destination);
         purl = purl.replace("NAME",data[index].name);
+        purl = encodeURIComponent(purl);
         console.log(purl);
         var item = {
             Title:data[index].name + ":" + data[index].address,
             Description:"",
-            PicUrl:purl,
-            Url:""
+            PicUrl:"",
+            Url:purl
         };
         labels += "|" + data[index].name + labelsstyle;
         markers += "|" + data[index].location.lng + "," + data[index].location.lat;
