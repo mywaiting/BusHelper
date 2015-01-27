@@ -29,7 +29,7 @@ router.post('/',function(req, res){
                         latitude:req.body.Latitude,
                         longitude:req.body.Longitude
                     };
-                    json = utils.Convert_GCJ02_To_BD09(json);
+                    json = utils.wgs2bd(json);
                     User.setUser(json,function(err){
                         if(err) console.log(err);
                         res.end();

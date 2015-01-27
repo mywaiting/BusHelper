@@ -32,8 +32,8 @@ var userLocation = "<xml>" +
     "<CreateTime>1408091189</CreateTime>" +
     "<MsgType><![CDATA[event]]></MsgType>" +
     "<Event><![CDATA[LOCATION]]></Event>" +
-    "<Latitude>23.137466</Latitude>" +
-    "<Longitude>113.352425</Longitude>" +
+    "<Latitude>23.037725</Latitude>" +
+    "<Longitude>113.394302</Longitude>" +
     "<Precision>119.385040</Precision>" +
     "</xml>";
 
