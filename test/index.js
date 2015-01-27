@@ -39,7 +39,7 @@ var userLocation = "<xml>" +
 
 var location = "<xml>" +
     "<ToUserName><![CDATA[gh_e136c6e50636]]></ToUserName>" +
-    "<FromUserName><![CDATA[oMgHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
+    "<FromUserName><![CDATA[MogHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
     "<CreateTime>1408091189</CreateTime>" +
     "<MsgType><![CDATA[event]]></MsgType>" +
     "<Event><![CDATA[location_select]]></Event>" +
@@ -51,6 +51,15 @@ var location = "<xml>" +
     "   <Poiname><![CDATA[]]></Poiname>" +
     "</SendLocationInfo>" +
     "</xml>";
+
+var currentMap = "<xml>" +
+    "<ToUserName><![CDATA[toUser]]></ToUserName>" +
+    "<FromUserName><![CDATA[MogHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
+    "<CreateTime>123456789</CreateTime>" +
+    "<MsgType><![CDATA[event]]></MsgType>" +
+    "<Event><![CDATA[CLICK]]></Event>" +
+    "<EventKey><![CDATA[near_map]]></EventKey>" +
+"</xml>";
 
 describe("测试:",function(){
     before(function(done){
@@ -92,6 +101,19 @@ describe("测试:",function(){
                 .set("Content-Type", "text/xml")
                 .expect(200)
                 .send(str)
+                .end(function(err,res){
+                    console.log(res.res.text);
+                    done(err);
+                })
+        });
+    });
+
+    describe("测试查看附近地图",function(){
+        it("测试开始",function(done){
+            request.post("/")
+                .set("Content-Type","text/xml")
+                .expect(200)
+                .send(currentMap)
                 .end(function(err,res){
                     console.log(res.res.text);
                     done(err);

@@ -1,9 +1,9 @@
 function response(){};
-response.responseText = function(req,content){
+response.responseText = function(json,content){
     var createTime = new Date().getTime();
     var xml = "<xml>" +
-        "<ToUserName><![CDATA[" + req.body.FromUserName +"]]></ToUserName>" +
-        "<FromUserName><![CDATA[" + req.body.ToUserName + "]]></FromUserName>" +
+        "<ToUserName><![CDATA[" + json.FromUserName +"]]></ToUserName>" +
+        "<FromUserName><![CDATA[" + json.ToUserName + "]]></FromUserName>" +
         "<CreateTime>" + createTime + "</CreateTime>" +
         "<MsgType><![CDATA[text]]></MsgType>" +
         "<Content><![CDATA[" + content +"]]></Content>" +

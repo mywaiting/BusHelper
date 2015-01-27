@@ -7,6 +7,7 @@ var router = express.Router();
 var searcher = require("../businesses/searcher");
 var User = require("../businesses/user");
 var utils = require("../businesses/utils");
+var response = require("../businesses/response");
 
 router.get('/',function(req,res){
     res.end(req.query.echostr);
@@ -35,13 +36,36 @@ router.post('/',function(req, res){
                         res.end();
                     });
                     break;
+                case 'CLICK':
+                    switch(req.body.EventKey){
+                        case 'near_map':
+                            searcher.currentMap(req.body,function(err,data){
+                                if(err){
+                                   console.log(err);
+                                    res.end();
+                                }else{
+                                    res.end(data);
+                                }
+                            });
+                            break;
+                        case 'near_panorama':
+                            break;
+                        default:
+                            res.end();
+                            break;
+                    }
+                    break;
                 case 'subscribe':
                     //用户订阅触发的事件
+                    var content = "欢迎使用肇庆无线公交查询.";
+                    var xml = response.responseText(req.body,content);
+                    console.log(xml);
+                    res.end();
                     break;
                 case 'unsubscribe':
                     //用户取消订阅触发的事件
                     break;
-                default :
+                default:
                     res.end();
                     break;
             }
@@ -71,7 +95,7 @@ router.post('/',function(req, res){
                 });
             }
             break;
-        default :
+        default:
             console.log('error');
             break;
     }
