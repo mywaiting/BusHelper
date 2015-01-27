@@ -21,7 +21,6 @@ Searcher.responseSearch = function(data,options){
         var destination = data[index].location.lat + "," + data[index].location.lng;
         var purl = path.replace("DESTINATION",destination);
         purl = purl.replace("NAME",data[index].name);
-        purl = encodeURIComponent(purl);
         console.log(purl);
         var item = {
             Title:data[index].name + ":" + data[index].address,
@@ -69,7 +68,7 @@ Searcher.search = function(json,callback){
             }else{
                 var path = Url.baidu.searcherPath;
                 var query = content.slice(2,content.length);
-                if(doc.latitude && doc.longitude){
+                if(doc){
                     path = path.replace('location_X',doc.latitude);
                     path = path.replace('location_Y',doc.longitude);
                     path = path.replace('QUERY',query);
@@ -114,7 +113,7 @@ Searcher.currentMap = function(json,callback){
         user.getUser(name,function(err,doc){
             if(err) callback(err);
             else{
-                if(doc.longitude && doc.latitude){
+                if(doc){
                     var location = doc.longitude + "," + doc.latitude;
                     path = path.replace('LOCATION',location);
                     var content = new Array();
