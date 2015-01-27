@@ -22,41 +22,37 @@ function gcj2bd(json){
     return json;
 }
 
-function transformLat(json){
-    var lon = json.longitude;
-    var lat = json.latitude;
-    var ret = -100.0 + 2.0 * lat + 3.0 * lon + 0.2 * lon * lon + 0.1 * lat * lon + 0.2 * Math.sqrt(Math.abs(lat));
-    ret += (20.0 * Math.sin(6.0 * lat * pi) + 20.0 * Math.sin(2.0 * lat * pi)) * 2.0 / 3.0;
-    ret += (20.0 * Math.sin(lon * pi) + 40.0 * Math.sin(lon / 3.0 * pi)) * 2.0 / 3.0;
-    ret += (160.0 * Math.sin(lon / 12.0 * pi) + 320 * Math.sin(lon * pi  / 30.0)) * 2.0 / 3.0;
+function transformLat(x,y)
+{
+    var ret = -100.0 + 2.0 * x + 3.0 * y + 0.2 * y * y + 0.1 * x * y + 0.2 * Math.sqrt(Math.abs(x));
+    ret += (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 / 3.0;
+    ret += (20.0 * Math.sin(y * pi) + 40.0 * Math.sin(y / 3.0 * pi)) * 2.0 / 3.0;
+    ret += (160.0 * Math.sin(y / 12.0 * pi) + 320 * Math.sin(y * pi / 30.0)) * 2.0 / 3.0;
     return ret;
 }
 
-function transformLon(json){
-    var lon = json.longitude;
-    var lat = json.latitude;
-    var ret = 300.0 + lat + 2.0 * lon + 0.1 * lat * lat + 0.1 * lat * lon + 0.1 * Math.sqrt(Math.abs(lat));
-    ret += (20.0 * Math.sin(6.0 * lat * pi) + 20.0 * Math.sin(2.0 * lat * pi)) * 2.0 / 3.0;
-    ret += (20.0 * Math.sin(lat * pi) + 40.0 * Math.sin(lat / 3.0 * pi)) * 2.0 / 3.0;
-    ret += (150.0 * Math.sin(lat / 12.0 * pi) + 300.0 * Math.sin(lat / 30.0 * pi)) * 2.0 / 3.0;
+function transformLon(x,y)
+{
+    var ret = 300.0 + x + 2.0 * y + 0.1 * x * x + 0.1 * x * y + 0.1 * Math.sqrt(Math.abs(x));
+    ret += (20.0 * Math.sin(6.0 * x * pi) + 20.0 * Math.sin(2.0 * x * pi)) * 2.0 / 3.0;
+    ret += (20.0 * Math.sin(x * pi) + 40.0 * Math.sin(x / 3.0 * pi)) * 2.0 / 3.0;
+    ret += (150.0 * Math.sin(x / 12.0 * pi) + 300.0 * Math.sin(x / 30.0 * pi)) * 2.0 / 3.0;
     return ret;
 }
 
 function wgs2gcj(json){
-    var lon = json.longitude;
-    var lat = json.latitude;
-    var tLon = lon - 105.0;
-    var tLat = lat - 35.0;
-    var dLat = transformLat({longitude:tLon,latitude:tLat});
-    var dLon = transformLon({longitude:tLon,latitude:tLat});
-    var radLat = lat / 180.0 * pi;
+    var wgLon = json.longitude;
+    var wgLat = json.latitude;
+    var dLat = transformLat(wgLon - 105.0, wgLat - 35.0);
+    var dLon = transformLon(wgLon - 105.0, wgLat - 35.0);
+    var radLat = wgLat / 180.0 * pi;
     var magic = Math.sin(radLat);
     magic = 1 - ee * magic * magic;
     var sqrtMagic = Math.sqrt(magic);
     dLat = (dLat * 180.0) / ((a * (1 - ee)) / (magic * sqrtMagic) * pi);
     dLon = (dLon * 180.0) / (a / sqrtMagic * Math.cos(radLat) * pi);
-    var mgLat = parseFloat(lat) + dLat;
-    var mgLon = parseFloat(lon) + dLon;
+    var mgLat = parseFloat(wgLat) + dLat;
+    var mgLon = parseFloat(wgLon) + dLon;
     json.longitude = mgLon;
     json.latitude = mgLat;
     return json;
@@ -64,8 +60,8 @@ function wgs2gcj(json){
 
 Utils.wgs2bd = function(json){
     json = wgs2gcj(json);
-    console.log(json);
     json = gcj2bd(json);
+    console.log(json);
     return json;
 };
 
