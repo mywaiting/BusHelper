@@ -26,7 +26,7 @@ Searcher.responseSearch = function(data,options){
             Title:data[index].name + ":" + data[index].address,
             Description:"",
             PicUrl:"",
-            Url:purl
+            Url:""
         };
         labels += "|" + data[index].name + labelsstyle;
         markers += "|" + data[index].location.lng + "," + data[index].location.lat;
@@ -162,11 +162,11 @@ function requestDirection(json,origin,destination,callback){
                     var distance = scheme.distance / 1000;
                     var duration = parseInt(scheme.duration / 60);
                     var steps = scheme.steps;
-                    var content = "开始:";
+                    var content = "开始:\n";
                     for(var index in steps){
-                        content += steps[index][0].stepInstruction + ",";
+                        content += steps[index][0].stepInstruction + ",\n";
                     }
-                    content += "到达.耗时:" + duration + "分,距离:" + distance + "千米.";
+                    content += "到达.\n耗时:" + duration + "分,\n距离:" + distance + "千米.";
                     var reg1 = new RegExp('<font color="#[0-9a-f]*">',"g");
                     content = content.replace(reg1,"");
                     var reg2 = new RegExp('</font>',"g");

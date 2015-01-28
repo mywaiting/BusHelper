@@ -91,6 +91,7 @@ router.post('/',function(req, res){
                     }
                 });
             }
+            res.end();
             break;
         default:
             console.log('error');
