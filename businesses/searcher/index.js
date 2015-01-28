@@ -118,7 +118,7 @@ Searcher.currentMap = function(json,callback){
                     path = path.replace('LOCATION',location);
                     var content = new Array();
                     var picurl = "http://api.map.baidu.com/staticimage?center=" +
-                        location +
+                        doc.longitude + "," + doc.latitude +
                         "&width=640&height=320&zoom=16";
                     var item = {
                         Title:"点击查看附近地图",
