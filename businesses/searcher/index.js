@@ -135,11 +135,78 @@ Searcher.currentMap = function(json,callback){
                 }
             }
         });
+    }else{
+        callback("error");
     }
 };
 
-Searcher.currentPanorama = function(json,callback){
-    var name = json.FromUserName;
+function requestDirection(json,origin,destination,callback){
+    var path = Url.baidu.directionPath;
+    path = path.replace("ORIGIN",origin);
+    path = path.replace("DESTINATION",destination);
+    var options = {
+        hostname :Url.baidu.hostname,
+        path:path,
+        method:'GET'
+    };
+    utils.requestBaidu(options,function(err,str){
+        if(err){
+            callback(err);
+        }else{
+            var data = JSON.parse(str);
+            if(data.status == 0){
+                if(data.type == 1) callback("输入的地名不明确!");
+                else{
+                    var routes = data.result.routes;
+                    var scheme = routes[0].scheme[0];
+                    var distance = scheme.distance / 1000;
+                    var duration = parseInt(scheme.duration / 60);
+                    var steps = scheme.steps;
+                    var content = "开始:";
+                    for(var index in steps){
+                        content += steps[index][0].stepInstruction + ",";
+                    }
+                    content += "到达.耗时:" + duration + "分,距离:" + distance + "千米.";
+                    var xml = response.responseText(json,content);
+                    callback(null,xml);
+                }
+            }else{
+                callback(data.message);
+            }
+        }
+    });
+}
+
+Searcher.direct = function(json,callback){
+    if(typeof(json) == 'object'){
+        var name = json.FromUserName;
+        var content = json.Content;
+        var index = content.indexOf("到");
+        if(index == 0 && index < content.length - 1){
+            user.getUser(name,function(err,doc){
+                if(err) callback(err);
+                else{
+                    if(doc){
+                        var origin = doc.latitude + "," + doc.longitude;
+                        var destination = content.slice(index + 1);
+                        requestDirection(json,origin,destination,callback);
+                    }else{
+                        callback("缓存里没有该用户信息!");
+                    }
+                }
+            });
+        }else{
+            if(0 < index && index < content.length - 1){
+                var origin = content.slice(0,index);
+                var destination = content.slice(index + 1);
+                requestDirection(json,origin,destination,callback);
+            }else{
+                callback("输入错误!");
+            }
+        }
+    }else{
+        callback("error");
+    }
 };
 
 module.exports = Searcher;

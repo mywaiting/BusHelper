@@ -48,8 +48,6 @@ router.post('/',function(req, res){
                                 }
                             });
                             break;
-                        case 'near_panorama':
-                            break;
                         default:
                             res.end();
                             break;
@@ -60,10 +58,11 @@ router.post('/',function(req, res){
                     var content = "欢迎使用肇庆无线公交查询.";
                     var xml = response.responseText(req.body,content);
                     console.log(xml);
-                    res.end();
+                    res.end(xml);
                     break;
                 case 'unsubscribe':
                     //用户取消订阅触发的事件
+                    res.end();
                     break;
                 default:
                     res.end();
@@ -78,9 +77,7 @@ router.post('/',function(req, res){
                         console.log(err);
                         res.end();
                     }else{
-                        data = JSON.parse(data);
-                        console.log(data.result);
-                        res.end();
+                        res.end(data);
                     }
                 });
             }

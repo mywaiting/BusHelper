@@ -17,6 +17,15 @@ var str =   "<xml>" +
     "<MsgId>1234567890123456</MsgId>" +
     "</xml>";
 
+var direct = "<xml>" +
+    "<ToUserName><![CDATA[randomplayer]]></ToUserName>" +
+    "<FromUserName><![CDATA[MogHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
+    "<CreateTime>1348831860</CreateTime>" +
+    "<MsgType><![CDATA[text]]></MsgType>" +
+    "<Content><![CDATA[广工到天河城]]></Content>" +
+    "<MsgId>1234567890123456</MsgId>" +
+    "</xml>";
+
 var json = {
     ToUserName: 'owWqluO0UiXVM0oBIDcDXF-TPYfs',
     FromUserName: 'randomplayer',
@@ -95,7 +104,7 @@ describe("测试:",function(){
         });
     });
 
-    describe("测试导航",function(){
+    describe("测试附近",function(){
         it("解析xml",function(done){
             request.post("/")
                 .set("Content-Type", "text/xml")
@@ -118,6 +127,19 @@ describe("测试:",function(){
                     console.log(res.res.text);
                     done(err);
                 })
+        });
+    });
+
+    describe("测试导航:",function(){
+        it("测试开始",function(done){
+           request.post("/")
+               .set("Content-Type","text/xml")
+               .expect(200)
+               .send(direct)
+               .end(function(err,res){
+                   console.log(res.res.text);
+                   done(err);
+               })
         });
     });
 });
