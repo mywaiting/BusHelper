@@ -167,6 +167,10 @@ function requestDirection(json,origin,destination,callback){
                         content += steps[index][0].stepInstruction + ",";
                     }
                     content += "到达.耗时:" + duration + "分,距离:" + distance + "千米.";
+                    var reg1 = new RegExp('<font color="#[0-9a-f]*">',"g");
+                    content = content.replace(reg1,"");
+                    var reg2 = new RegExp('</font>',"g");
+                    content = content.replace(reg2,"");
                     var xml = response.responseText(json,content);
                     callback(null,xml);
                 }
