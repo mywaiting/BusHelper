@@ -71,7 +71,9 @@ router.post('/',function(req, res){
             break;
         case 'text':
             //用户发送文本
-            if(req.body.Content.match("到")){
+            var flag = true;
+            if(req.body.Content.match("到") && flag){
+                flag == false;
                 searcher.direct(req.body,function(err,data){
                     if(err){
                         console.log(err);
@@ -81,7 +83,8 @@ router.post('/',function(req, res){
                     }
                 });
             }
-            if(req.body.Content.match("附近")){
+            if(req.body.Content.match("附近") && flag){
+                flag == false;
                 searcher.search(req.body,function(err,data){
                     if(err){
                         console.log(err);
@@ -91,7 +94,9 @@ router.post('/',function(req, res){
                     }
                 });
             }
-            res.end();
+            if(flag){
+                res.end();
+            }
             break;
         default:
             console.log('error');
