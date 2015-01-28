@@ -10,7 +10,7 @@ var utils = require("../businesses/utils");
 var response = require("../businesses/response");
 
 router.get('/',function(req,res){
-    res.end(req.query.echostr);
+    utils.validateToken(req,res);
 });
 
 router.post('/',function(req, res){

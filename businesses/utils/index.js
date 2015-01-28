@@ -3,6 +3,15 @@
  */
 var js2xmlparser = require("js2xmlparser");
 var http = require('http');
+var crypto = require('crypto');
+
+function sha1(str) {
+    var md5sum = crypto.createHash('sha1');
+    md5sum.update(str);
+    str = md5sum.digest('hex');
+    return str;
+}
+
 function Utils(){}
 
 var pi = 3.14159265358979324;
@@ -122,6 +131,27 @@ Utils.requestBaidu = function(options,callback){
     request.end();
 };
 
-
+Utils.validateToken = function(req,res){
+    var query = req.query;
+    var signature = query.signature;
+    var echostr = query.echostr;
+    var timestamp = query['timestamp'];
+    var nonce = query.nonce;
+    var oriArray = new Array();
+    oriArray[0] = nonce;
+    oriArray[1] = timestamp;
+    oriArray[2] = "hello";//这里填写你的token
+    oriArray.sort();
+    var original = oriArray[0]+oriArray[1]+oriArray[2];
+    console.log("Original Str:"+original);
+    console.log("signature:"+signature);
+    var scyptoString = sha1(original);
+    if (signature == scyptoString) {
+        res.end(echostr);
+    }
+    else {
+        res.end("Bad Token!");
+    }
+};
 
 module.exports = Utils;
