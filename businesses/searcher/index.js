@@ -114,7 +114,7 @@ Searcher.currentMap = function(json,callback){
             if(err) callback(err);
             else{
                 if(doc){
-                    var location = doc.longitude + "," + doc.latitude;
+                    var location = doc.latitude + "," + doc.longitude;
                     path = path.replace('LOCATION',location);
                     var content = new Array();
                     var picurl = "http://api.map.baidu.com/staticimage?center=" +
