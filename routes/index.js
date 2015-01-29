@@ -8,9 +8,22 @@ var searcher = require("../businesses/searcher");
 var User = require("../businesses/user");
 var utils = require("../businesses/utils");
 var response = require("../businesses/response");
+var Url = require("../db/models/url.js");
 
 router.get('/',function(req,res){
     utils.validateToken(req,res);
+});
+
+router.get('/walkDirection',function(req,res){
+    var origin = req.query.origin;
+    var destination = req.query.destination;
+    var name = req.query.name;
+    var path = Url.baidu.hostname + Url.baidu.walkDirection;
+    path = path.replace("ORIGIN",origin);
+    path = path.replace("DESTINATION",destination);
+    path = path.replace("NAME",name);
+    console.log(path);
+    res.redirect(path);
 });
 
 router.post('/',function(req, res){
@@ -79,7 +92,7 @@ router.post('/',function(req, res){
             //用户发送文本
             var flag = true;
             if(req.body.Content.match("到") && flag){
-                flag == false;
+                flag = false;
                 searcher.direct(req.body,function(err,data){
                     if(err){
                         console.log(err);
@@ -90,7 +103,7 @@ router.post('/',function(req, res){
                 });
             }
             if(req.body.Content.match("附近") && flag){
-                flag == false;
+                flag = false;
                 searcher.search(req.body,function(err,data){
                     if(err){
                         console.log(err);

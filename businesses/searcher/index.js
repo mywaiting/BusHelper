@@ -13,10 +13,9 @@ Searcher.responseSearch = function(data,options){
     var markers = options.longitude + "," + options.latitude;
     var labelsstyle = ",1,14,0xffffff,0xff0000,1";
     var labels = "当前位置" + labelsstyle;
-    var path = Url.baidu.hostname + Url.baidu.walkDirection;
+    var path = Url.server.hostname + Url.server.walkDirection;
     var origin = options.latitude + "," + options.longitude;
     path = path.replace("ORIGIN",origin);
-    console.log(data);
     for(var index in data){
         var destination = data[index].location.lat + "," + data[index].location.lng;
         var purl = path.replace("DESTINATION",destination);
@@ -26,7 +25,7 @@ Searcher.responseSearch = function(data,options){
             Title:data[index].name + ":" + data[index].address,
             Description:"",
             PicUrl:"",
-            Url:""
+            Url:purl
         };
         labels += "|" + data[index].name + labelsstyle;
         markers += "|" + data[index].location.lng + "," + data[index].location.lat;
@@ -149,14 +148,18 @@ function requestDirection(json,origin,destination,callback){
         path:path,
         method:'GET'
     };
+    console.log(path);
     utils.requestBaidu(options,function(err,str){
         if(err){
             callback(err);
         }else{
             var data = JSON.parse(str);
             if(data.status == 0){
-                if(data.type == 1) callback("输入的地名不明确!");
-                else{
+                if(data.type == 1){
+                    var content = "输入的地址不明确!";
+                    var xml = response.responseText(json,content);
+                    callback(null,xml);
+                }else{
                     var routes = data.result.routes;
                     var scheme = routes[0].scheme[0];
                     var distance = scheme.distance / 1000;
