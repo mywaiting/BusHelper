@@ -23,7 +23,7 @@ router.get('/walkDirection',function(req,res){
     path = path.replace("DESTINATION",destination);
     path = path.replace("NAME",name);
     console.log(path);
-    res.redirect(path);
+    return res.redirect(path);
 });
 
 router.post('/',function(req, res){
