@@ -39,6 +39,7 @@ router.post('/',function(req, res){
                 case 'CLICK':
                     switch(req.body.EventKey){
                         case 'near_map':
+                            //用户点击菜单的查看附近地图按钮
                             searcher.currentMap(req.body,function(err,data){
                                 if(err){
                                    console.log(err);
@@ -48,6 +49,11 @@ router.post('/',function(req, res){
                                 }
                             });
                             break;
+                        case 'help':
+                            //用户点击菜单的帮助按钮
+                            var content = '<a href="http://api.map.baidu.com/direction?origin=latlng:23.0414054368152,113.40674202172153|name:当前位置&destination=latlng:23.049785,113.406904|name:大学城南&mode=walking&region=广州&output=html&src=src">欢迎使用肇庆无线公交查询.</a>';
+                            var xml = response.responseText(req.body,content);
+                            res.end(xml);
                         default:
                             res.end();
                             break;
