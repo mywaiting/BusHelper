@@ -13,7 +13,7 @@ Searcher.responseSearch = function(data,options){
     var markers = options.longitude + "," + options.latitude;
     var labelsstyle = ",1,14,0xffffff,0xff0000,1";
     var labels = "当前位置" + labelsstyle;
-    var path = Url.baidu.hostname + Url.baidu.walkDirection;
+    var path = Url.server.hostname + Url.server.walkDirection;
     var origin = options.latitude + "," + options.longitude;
     path = path.replace("ORIGIN",origin);
     for(var index in data){

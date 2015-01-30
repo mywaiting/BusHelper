@@ -18,7 +18,7 @@ router.get('/walkDirection',function(req,res){
     var origin = req.query.origin;
     var destination = req.query.destination;
     var name = req.query.name;
-    var path = Url.baidu.hostname + Url.baidu.walkDirection;
+    var path = "http://" + Url.baidu.hostname + Url.baidu.walkDirection;
     path = path.replace("ORIGIN",origin);
     path = path.replace("DESTINATION",destination);
     path = path.replace("NAME",name);
