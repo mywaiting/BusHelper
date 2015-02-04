@@ -13,19 +13,26 @@ DaoLine.getLine = function(json,callback){
         else{
             var direct = json.Content.slice(json.Content.indexOf("-") + 1);
             var content = "";
+            var array = new Array();
+            for(var key in doc){
+                if(key != "start" && key != "end"){
+                    if(doc[key] == 1){
+                        var k = key + "=\n";
+                        array.push(k);
+                    }else{
+                        var k = key + "\n";
+                        array.push(k);
+                    }
+                }
+            }
             if(direct == "1"){
                 content += "线路" + name + "(" + doc.start + "-" + doc.end + ")\n";
             }else{
                 content += "线路" + name + "(" + doc.end + "-" + doc.start + ")\n";
+                array.reverse();
             }
-            for(var key in doc){
-                if(key != "start" && key != "end"){
-                    if(doc[key] == 1){
-                        content += key + ":" + "=\n";
-                    }else{
-                        content += key + "\n";
-                    }
-                }
+            for(var index in array){
+                content += array[index];
             }
             content += "=表示公交车在该站附近,-1表示下行,-2表示上行.\n";
             if(direct == "1"){
@@ -34,7 +41,7 @@ DaoLine.getLine = function(json,callback){
                 var xml = response.responseText(json,content);
                 callback(null,xml);
             }else{
-                call(null,content);
+                callback(null,content);
             }
         }
     });
