@@ -1,41 +1,57 @@
 /**
  * Created by root on 15-1-21.
  */
-var js2xmlparser = require("js2xmlparser");
-var utils = require("../utils");
+var redis = require("redis");
+var response = require("../response");
 
-var StationModel = require('../../db/models/station');
+function Station(){}
 
-function Station(){
-    this.getStationPos = function(){
-        console.log("hello");
-    };
+Station.getLines = function(name,callback){
+    var client = redis.createClient();
+    client.llen(name,function(err,length){
+        if(err) callback(err);
+        else{
+            client.lrange(name,0,length - 1,function(err,doc){
+               callback(err,doc);
+            });
+        }
+    });
+}
 
-    this.addStationPos = function(success_cb,fail_cb){
-        var param = {name: "体育中心", lat: "40.056878", lng: "116.30815"};
-        StationModel.create(param,function(err,station){
-            if(err)
-               fail_cb(err);
-            success_cb(station);
-        });
-    };
+Station.response = function(json,callback){
+    var station = json.Content;
+    var station1 = station + "-1";
+    var station2 = station + "-2";
+    Station.getLines(station1,function(err,data1){
+        if(err) callback(err);
+        else{
+            Station.getLines(station2,function(err,data2){
+                if(err) callback(err);
+                else{
+                    var content = "";
+                    if(data1.length == 0 && data2.length == 0){
+                        content += "您输入有误!";
+                    }else{
+                        if(data1.length != 0){
+                            content += "经过" + station1 + "的路线:\n";
+                            for(var index in data1){
+                                content += data1[index] + "路\n";
+                            }
+                        }
+                        if(data2.length != 0){
+                            content += "经过" + station2 + "的路线:\n";
+                            for(var index in data2){
+                                content += data2[index] + "路\n";
+                            }
+                        }
+                        content += "-1表示下行方向,-2表示上行方向.";
+                    }
+                    var xml = response.responseText(json,content);
+                    callback(null,xml);
+                }
+            });
+        }
+    });
+}
 
-    this.updateStationPos = function(){
-        console.log('hello');
-    };
-    this.deleteStaionPos = function(){
-        console.log('hello');
-    }
-    this.jsonToXml = function(){
-        var data = {
-            "ToUserName": "<![CDATA[owWqluO0UiXVM0oBIDcDXF-TPYfs]]>",
-            "FromUserName": "<![CDATA[CyrilZhao]]>",
-            "CreateTime": parseInt((new Date()).getTime() / 1000),
-            "MsgType": "<![CDATA[text]]>",
-            "Content": "<![CDATA[你好，世界]]>"
-        };
-        var xml = js2xmlparser("xml", data);
-        return utils.xmlFilter(xml);
-    };
-};
 module.exports = Station;

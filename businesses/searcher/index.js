@@ -13,7 +13,7 @@ Searcher.responseSearch = function(data,options){
     var markers = options.longitude + "," + options.latitude;
     var labelsstyle = ",1,14,0xffffff,0xff0000,1";
     var labels = "当前位置" + labelsstyle;
-    var path = Url.server.hostname + Url.server.walkDirection;
+    var path = Url.baidu.hostname + Url.baidu.walkDirection;
     var origin = options.latitude + "," + options.longitude;
     path = path.replace("ORIGIN",origin);
     for(var index in data){
@@ -25,7 +25,7 @@ Searcher.responseSearch = function(data,options){
             Title:data[index].name + ":" + data[index].address,
             Description:"",
             PicUrl:"",
-            Url:""
+            Url:purl
         };
         labels += "|" + data[index].name + labelsstyle;
         markers += "|" + data[index].location.lng + "," + data[index].location.lat;

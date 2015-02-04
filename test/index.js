@@ -70,6 +70,24 @@ var currentMap = "<xml>" +
     "<EventKey><![CDATA[near_map]]></EventKey>" +
 "</xml>";
 
+var station = "<xml>" +
+    "<ToUserName><![CDATA[randomplayer]]></ToUserName>" +
+    "<FromUserName><![CDATA[MogHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
+    "<CreateTime>1348831860</CreateTime>" +
+    "<MsgType><![CDATA[text]]></MsgType>" +
+    "<Content><![CDATA[端州工业城]]></Content>" +
+    "<MsgId>1234567890123456</MsgId>" +
+    "</xml>";
+
+var line = "<xml>" +
+    "<ToUserName><![CDATA[randomplayer]]></ToUserName>" +
+    "<FromUserName><![CDATA[MogHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
+    "<CreateTime>1348831860</CreateTime>" +
+    "<MsgType><![CDATA[text]]></MsgType>" +
+    "<Content><![CDATA[9]]></Content>" +
+    "<MsgId>1234567890123456</MsgId>" +
+    "</xml>";
+
 describe("测试:",function(){
     before(function(done){
         done();
@@ -140,6 +158,32 @@ describe("测试:",function(){
                    console.log(res.res.text);
                    done(err);
                })
+        });
+    });
+
+    describe("测试查询公交站线路:",function(){
+        it("测试开始",function(done){
+            request.post("/")
+                .set("Content-Type","text/xml")
+                .expect(200)
+                .send(station)
+                .end(function(err,res){
+                    console.log(res.res.text);
+                    done(err);
+                })
+        });
+    });
+
+    describe("测试线路:",function(){
+        it("测试开始",function(done){
+            request.post("/")
+                .set("Content-Type","text/xml")
+                .expect(200)
+                .send(line)
+                .end(function(err,res){
+                    console.log(res.res.text);
+                    done(err);
+                })
         });
     });
 

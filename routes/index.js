@@ -9,6 +9,8 @@ var User = require("../businesses/user");
 var utils = require("../businesses/utils");
 var response = require("../businesses/response");
 var Url = require("../db/models/url.js");
+var station = require("../businesses/station");
+var line = require("../businesses/line");
 
 router.get('/',function(req,res){
     utils.validateToken(req,res);
@@ -24,6 +26,20 @@ router.get('/walkDirection',function(req,res){
     path = path.replace("NAME",name);
     console.log(path);
     return res.redirect(path);
+});
+
+router.post('/line',function(req,res){
+    var station = req.query.station + "-2";
+    var json = {
+        Content:station
+    }
+    line.getLine(json,function(err,data){
+        if(err){
+            console.log(err);
+            res.end();
+        }
+        res.render('index',{div:data});
+    });
 });
 
 router.post('/',function(req, res){
@@ -89,9 +105,11 @@ router.post('/',function(req, res){
             }
             break;
         case 'text':
+            //所有公交线路的名字组成的字符串
+            var lines = "1,2,3,4,5,5B,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,25B,26,27,28,29,30,31,201,202,203,204,205,K01,K02";
             //用户发送文本
             var flag = true;
-            if(req.body.Content.match("到") && flag){
+            if(flag && req.body.Content.match("到")){
                 flag = false;
                 searcher.direct(req.body,function(err,data){
                     if(err){
@@ -102,7 +120,7 @@ router.post('/',function(req, res){
                     }
                 });
             }
-            if(req.body.Content.match("附近") && flag){
+            if(flag && req.body.Content.match("附近")){
                 flag = false;
                 searcher.search(req.body,function(err,data){
                     if(err){
@@ -113,8 +131,28 @@ router.post('/',function(req, res){
                     }
                 });
             }
+            var content = req.body.Content.toUpperCase()
+            if(flag && lines.match(content)){
+                flag = false;
+                req.body.Content += "-1";
+                line.getLine(req.body,function(err,data){
+                    if(err){
+                        console.log(err);
+                        res.end();
+                    }else{
+                        res.end(data);
+                    }
+                });
+            }
             if(flag){
-                res.end();
+                station.response(req.body,function(err,data){
+                    if(err){
+                        console.log(err);
+                        res.end();
+                    }else{
+                        res.end(data);
+                    }
+                });
             }
             break;
         default:
