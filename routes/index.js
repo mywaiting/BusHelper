@@ -38,7 +38,7 @@ router.get('/line',function(req,res){
             console.log(err);
             res.end();
         }
-        res.render('index',{div:data});
+        res.render('index',{message:data});
     });
 });
 
