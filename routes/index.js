@@ -29,17 +29,22 @@ router.get('/walkDirection',function(req,res){
 });
 
 router.get('/line',function(req,res){
-    var station = req.query.station + "-2";
-    var json = {
-        Content:station
-    }
-    line.getLine(json,function(err,data){
-        if(err){
-            console.log(err);
-            res.end();
+    var station = req.query.station;
+    var index = station.indexOf("-");
+    var lines = "1,2,3,4,5,5B,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,25B,26,27,28,29,30,31,201,202,203,204,205,K01,K02";
+    if(index > 0){
+        var lineNo = station.slice(0,index);
+        var direct = station.slice(index + 1);
+        if((direct == "1" || direct == "2") && lines.match(lineNo)){
+            line.getLineByGet(station,function(err,data){
+                if(err){
+                    console.log(err);
+                    res.end();
+                }
+                res.render('line',{data:data});
+            });
         }
-        res.render('index',{message:data});
-    });
+    }
 });
 
 router.post('/',function(req, res){

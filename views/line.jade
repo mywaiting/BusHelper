@@ -1,0 +1,17 @@
+//
+   Created by root on 15-2-5.
+extends layout
+block content
+    div
+        span= data.head
+        br
+        each value,key in data.doc
+            if key != "start" && key != "end"
+                span= key
+                if value == "1"
+                   img(src='/src/gongjiao.png')
+                br
+        img(src='/src/gongjiao.png')
+        span 表示公交车在该站附近,-1表示下行,-2表示上行.
+        br
+        a(href="http://120.24.80.233/line?station=#{data.station}") 反方向
