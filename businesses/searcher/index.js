@@ -207,6 +207,10 @@ Searcher.direct = function(json,callback){
         }else{
             if(0 < index && index < content.length - 1){
                 var origin = content.slice(0,index);
+                var firstStr = origin.slice(0,1);
+                if(firstStr == "从"){
+                    origin = origin.slice(1);
+                }
                 var destination = content.slice(index + 1);
                 requestDirection(json,origin,destination,callback);
             }else{

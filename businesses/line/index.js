@@ -17,7 +17,7 @@ DaoLine.getLine = function(json,callback){
             for(var key in doc){
                 if(key != "start" && key != "end"){
                     if(doc[key] == 1){
-                        var k = key + "=\n";
+                        var k = key + "    \ue159\n";
                         array.push(k);
                     }else{
                         var k = key + "\n";
@@ -26,15 +26,15 @@ DaoLine.getLine = function(json,callback){
                 }
             }
             if(direct == "1"){
-                content += "线路" + name + "(" + doc.start + "-" + doc.end + ")\n";
+                content += "线路" + json.Content + "(" + doc.start + "-" + doc.end + ")\n";
             }else{
-                content += "线路" + name + "(" + doc.end + "-" + doc.start + ")\n";
+                content += "线路" + json.Content + "(" + doc.end + "-" + doc.start + ")\n";
                 array.reverse();
             }
             for(var index in array){
                 content += array[index];
             }
-            content += "=表示公交车在该站附近,-1表示下行,-2表示上行.\n";
+            content += "\ue159表示公交车在该站附近,-1表示下行,-2表示上行.\n";
             if(direct == "1"){
                 var station = json.Content.slice(0,json.Content.indexOf("-"));
                 content += "<a href='http://120.24.80.233:80/line?station=" + station + "'>反方向</a>";

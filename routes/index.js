@@ -28,7 +28,7 @@ router.get('/walkDirection',function(req,res){
     return res.redirect(path);
 });
 
-router.post('/line',function(req,res){
+router.get('/line',function(req,res){
     var station = req.query.station + "-2";
     var json = {
         Content:station
@@ -131,7 +131,8 @@ router.post('/',function(req, res){
                     }
                 });
             }
-            var content = req.body.Content.toUpperCase()
+            var content = req.body.Content.toUpperCase();
+            content = parseInt(content);
             if(flag && lines.match(content)){
                 flag = false;
                 req.body.Content += "-1";
