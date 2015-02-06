@@ -96,8 +96,8 @@ Searcher.search = function(json,callback){
                         }
                     });
                 }else{
-                    var content = "请同意微信上报地理位置信息并重启微信后重试!";
-                    var xml = response.responseText(json,content);
+                    var con = "请同意微信上报地理位置信息并重启微信后重试!";
+                    var xml = response.responseText(json,con);
                     callback(null,xml);
                 }
             }
