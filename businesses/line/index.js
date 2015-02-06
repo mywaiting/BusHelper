@@ -10,7 +10,7 @@ DaoLine.getAllLine = function(json,callback){
     var array = lines.split(",");
     var content = "全部公交线路:\n";
     for(var i in array){
-        content += "\ue231<a href='http://120.24.80.233:80/line?station=" + array[i] + "-1'>" + array[i] + "</a>\ue230\n";
+        content += "<a href='http://120.24.80.233/line?station=" + array[i] + "-1'>" + array[i] + "</a>\n";
     }
     var xml = response.responseText(json,content);
     callback(xml);

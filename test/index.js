@@ -72,6 +72,15 @@ var line = "<xml>" +
     "<MsgId>1234567890123456</MsgId>" +
     "</xml>";
 
+var allLines = "<xml>" +
+    "<ToUserName><![CDATA[toUser]]></ToUserName>" +
+    "<FromUserName><![CDATA[MogHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
+    "<CreateTime>123456789</CreateTime>" +
+    "<MsgType><![CDATA[event]]></MsgType>" +
+    "<Event><![CDATA[CLICK]]></Event>" +
+    "<EventKey><![CDATA[route]]></EventKey>" +
+    "</xml>";
+
 describe("测试:",function(){
     before(function(done){
         done();
@@ -156,6 +165,19 @@ describe("测试:",function(){
                     done(err);
                 })
         });
+    });
+
+    describe("测试查看全部线路:",function(){
+        it("测试开始",function(done){
+            request.post("/")
+                .set("Content-Type","text/xml")
+                .expect(200)
+                .send(allLines)
+                .end(function(err,res){
+                    console.log(res.res.text);
+                    done(err);
+                })
+        })
     });
 
 });

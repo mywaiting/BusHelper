@@ -5,6 +5,18 @@ var response = require('../response');
 
 function Function(){}
 
+Function.cooperation = function(json,callback){
+    var content = "广州紫睿科技有限公司\n" +
+        "联系人:蔡生\n" +
+        "联系方式:17702036624\n" +
+        "地址:广州市大学城外环西路100号国家电路集成基地216\n" +
+        "肇庆市公共汽车有限公司\n" +
+        "广告电话:0758-2903886\n" +
+        "地址:肇庆市站前西路肇庆市公共";
+    var xml = response.responseText(json,content);
+    callback(xml);
+}
+
 Function.help = function(json,callback){
     var content = "欢迎使用肇庆无线公交!\ue159\n" +
         "1.发送公交线路名称(例如15或15路或15线)可查看该线路公交车到了哪个站.\n" +
@@ -53,7 +65,19 @@ Function.news = function(json,callback){
         PicUrl:"",
         Url:"http://www.zhaoqingbus.com.cn/_d276657718.htm"
     };
-    var content = new Array(item1,item2,item3,item4,item5);
+    var item6 = {
+        Title:"11路线调整通告",
+        Description:"",
+        PicUrl:"",
+        Url:"http://www.zhaoqingbus.com.cn/_d276622897.htm"
+    }
+    var item7 = {
+        Title:"拾金不昧展美德 雷锋精神在公交",
+        Description:"",
+        PicUrl:"",
+        Url:"http://www.zhaoqingbus.com.cn/_d276619244.htm"
+    }
+    var content = new Array(item1,item2,item3,item4,item5,item6,item7);
     var xml = response.responseNews(json,content);
     callback(xml);
 }

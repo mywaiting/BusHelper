@@ -143,6 +143,9 @@ router.post('/',function(req, res){
                             break;
                         case 'cooperation':
                             //用户点击商务合作按钮
+                            Function.cooperation(req.body,function(data){
+                                res.end();
+                            });
                             break;
                         default:
                             res.end();
