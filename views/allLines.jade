@@ -1,0 +1,11 @@
+//
+   Created by root on 15-2-6.
+extends layout
+block content
+    div
+        each value in data
+           a(href="http://localhost/line?station=#{value}-1") #{value}路
+           img(src='/src/left.png')
+           br
+
+

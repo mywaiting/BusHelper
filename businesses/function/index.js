@@ -12,7 +12,7 @@ Function.cooperation = function(json,callback){
         "地址:广州市大学城外环西路100号国家电路集成基地216\n" +
         "肇庆市公共汽车有限公司\n" +
         "广告电话:0758-2903886\n" +
-        "地址:肇庆市站前西路肇庆市公共";
+        "地址:肇庆市站前西路肇庆市公共汽车有限公司";
     var xml = response.responseText(json,content);
     callback(xml);
 }

@@ -32,6 +32,12 @@ router.get('/card',function(req,res){
     res.render('card');
 });
 
+router.get('/route',function(req,res){
+    var lines = "1,2,3,4,5,5B,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,25B,26,27,28,29,30,31,201,202,203,204,205,K01,K02";
+    var array = lines.split(",");
+    res.render('allLines',{data:array});
+});
+
 router.get('/line',function(req,res){
     var station = req.query.station;
     var index = station.indexOf("-");
@@ -123,12 +129,12 @@ router.post('/',function(req, res){
                                 res.end(data);
                             });
                             break;
-                        case 'route':
-                            //用户点击公交线路按钮
-                            line.getAllLine(req.body,function(data){
-                                res.end(data);
-                            });
-                            break;
+//                        case 'route':
+//                            //用户点击公交线路按钮
+//                            line.getAllLine(req.body,function(data){
+//                                res.end(data);
+//                            });
+//                            break;
                         case 'about':
                             //用户点击关于按钮
                             Function.about(req.body,function(data){
@@ -144,7 +150,7 @@ router.post('/',function(req, res){
                         case 'cooperation':
                             //用户点击商务合作按钮
                             Function.cooperation(req.body,function(data){
-                                res.end();
+                                res.end(data);
                             });
                             break;
                         default:

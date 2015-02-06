@@ -167,18 +167,18 @@ describe("测试:",function(){
         });
     });
 
-    describe("测试查看全部线路:",function(){
-        it("测试开始",function(done){
-            request.post("/")
-                .set("Content-Type","text/xml")
-                .expect(200)
-                .send(allLines)
-                .end(function(err,res){
-                    console.log(res.res.text);
-                    done(err);
-                })
-        })
-    });
+//    describe("测试查看全部线路:",function(){
+//        it("测试开始",function(done){
+//            request.post("/")
+//                .set("Content-Type","text/xml")
+//                .expect(200)
+//                .send(allLines)
+//                .end(function(err,res){
+//                    console.log(res.res.text);
+//                    done(err);
+//                })
+//        })
+//    });
 
 });
 
