@@ -5,6 +5,17 @@ var redis = require("redis");
 var response = require("../response");
 function DaoLine(){}
 
+DaoLine.getAllLine = function(json,callback){
+    var lines = "1,2,3,4,5,5B,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,25B,26,27,28,29,30,31,201,202,203,204,205,K01,K02";
+    var array = lines.split(",");
+    var content = "全部公交线路:\n";
+    for(var i in array){
+        content += "\ue231<a href='http://120.24.80.233:80/line?station=" + array[i] + "-1'>" + array[i] + "</a>\ue230\n";
+    }
+    var xml = response.responseText(json,content);
+    callback(xml);
+}
+
 DaoLine.getLine = function(json,callback){
     var client = redis.createClient();
     var name = json.Content + "H";
@@ -14,7 +25,8 @@ DaoLine.getLine = function(json,callback){
             if(doc){
                 var direct = json.Content.slice(json.Content.indexOf("-") + 1);
                 if(direct == "1"){
-                    var content = "";
+                    var station = json.Content.slice(0,json.Content.indexOf("-")) + "-2";
+                    var content = "\ue231<a href='http://120.24.80.233:80/line?station=" + station + "'>反方向</a>\ue230\n";
                     content += "线路" + json.Content + "(" + doc.start + "-" + doc.end + ")\n";
                     for(var key in doc){
                         if(key != "start" && key != "end"){
@@ -27,8 +39,6 @@ DaoLine.getLine = function(json,callback){
                         }
                     }
                     content += "\ue159表示公交车在该站附近,-1表示下行,-2表示上行.\n";
-                    var station = json.Content.slice(0,json.Content.indexOf("-")) + "-2";
-                    content += "<a href='http://120.24.80.233:80/line?station=" + station + "'>反方向</a>";
                     var xml = response.responseText(json,content);
                     callback(null,xml);
                 }

@@ -3,6 +3,8 @@
 extends layout
 block content
     div
+        a(href="http://120.24.80.233/line?station=#{data.station}") 反方向
+        br
         span= data.head
         br
         each value,key in data.doc
@@ -14,4 +16,4 @@ block content
         img(src='/src/gongjiao.png')
         span 表示公交车在该站附近,-1表示下行,-2表示上行.
         br
-        a(href="http://120.24.80.233/line?station=#{data.station}") 反方向
+

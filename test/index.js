@@ -84,7 +84,7 @@ var line = "<xml>" +
     "<FromUserName><![CDATA[MogHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
     "<CreateTime>1348831860</CreateTime>" +
     "<MsgType><![CDATA[text]]></MsgType>" +
-    "<Content><![CDATA[9]]></Content>" +
+    "<Content><![CDATA[9路]]></Content>" +
     "<MsgId>1234567890123456</MsgId>" +
     "</xml>";
 

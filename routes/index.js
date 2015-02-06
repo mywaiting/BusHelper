@@ -7,10 +7,10 @@ var router = express.Router();
 var searcher = require("../businesses/searcher");
 var User = require("../businesses/user");
 var utils = require("../businesses/utils");
-var response = require("../businesses/response");
 var Url = require("../db/models/url.js");
 var station = require("../businesses/station");
 var line = require("../businesses/line");
+var Function = require("../businesses/function");
 
 router.get('/',function(req,res){
     utils.validateToken(req,res);
@@ -26,6 +26,10 @@ router.get('/walkDirection',function(req,res){
     path = path.replace("NAME",name);
     console.log(path);
     return res.redirect(path);
+});
+
+router.get('/card',function(req,res){
+    res.render('card');
 });
 
 router.get('/line',function(req,res){
@@ -53,10 +57,6 @@ router.post('/',function(req, res){
         case 'event':
             //用户触发事件
             switch(req.body.Event){
-                case 'location_select':
-                    //自定义菜单上报位置的事件
-                    res.end();
-                    break;
                 case 'LOCATION':
                     //用户自动上报位置的事件
                     var json = {
@@ -72,6 +72,40 @@ router.post('/',function(req, res){
                     break;
                 case 'CLICK':
                     switch(req.body.EventKey){
+                        case 'near_station':
+                            //查看附近公交站
+                            req.body.Content = "附近公交站";
+                            searcher.search(req.body,function(err,data){
+                                if(err){
+                                    console.log(err);
+                                    res.end();
+                                }else{
+                                    res.end(data);
+                                }
+                            });
+                            break;
+                        case 'near_food':
+                            req.body.Content = "附近美食";
+                            searcher.search(req.body,function(err,data){
+                                if(err){
+                                    console.log(err);
+                                    res.end();
+                                }else{
+                                    res.end(data);
+                                }
+                            });
+                            break;
+                        case 'near_shop':
+                            req.body.Content = "附近超市";
+                            searcher.search(req.body,function(err,data){
+                                if(err){
+                                    console.log(err);
+                                    res.end();
+                                }else{
+                                    res.end(data);
+                                }
+                            });
+                            break;
                         case 'near_map':
                             //用户点击菜单的查看附近地图按钮
                             searcher.currentMap(req.body,function(err,data){
@@ -85,9 +119,31 @@ router.post('/',function(req, res){
                             break;
                         case 'help':
                             //用户点击菜单的帮助按钮
-                            var content = '<a href="http://api.map.baidu.com/direction?origin=latlng:23.0414054368152,113.40674202172153|name:当前位置&destination=latlng:23.049785,113.406904|name:大学城南&mode=walking&region=广州&output=html&src=src">欢迎使用肇庆无线公交查询.</a>';
-                            var xml = response.responseText(req.body,content);
-                            res.end(xml);
+                            Function.help(req.body,function(data){
+                                res.end(data);
+                            });
+                            break;
+                        case 'route':
+                            //用户点击公交线路按钮
+                            line.getAllLine(req.body,function(data){
+                                res.end(data);
+                            });
+                            break;
+                        case 'about':
+                            //用户点击关于按钮
+                            Function.about(req.body,function(data){
+                                res.end(data);
+                            });
+                            break;
+                        case 'news':
+                            //用户点击公交新闻按钮
+                            Function.news(req.body,function(data){
+                                res.end(data);
+                            });
+                            break;
+                        case 'cooperation':
+                            //用户点击商务合作按钮
+                            break;
                         default:
                             res.end();
                             break;
@@ -95,10 +151,9 @@ router.post('/',function(req, res){
                     break;
                 case 'subscribe':
                     //用户订阅触发的事件
-                    var content = "欢迎使用肇庆无线公交查询.";
-                    var xml = response.responseText(req.body,content);
-                    console.log(xml);
-                    res.end(xml);
+                    Function.help(req.body,function(data){
+                        res.end(data);
+                    });
                     break;
                 case 'unsubscribe':
                     //用户取消订阅触发的事件
@@ -136,19 +191,22 @@ router.post('/',function(req, res){
                     }
                 });
             }
-            var content = req.body.Content.toUpperCase();
-            content = parseInt(content);
-            if(flag && lines.match(content)){
-                flag = false;
-                req.body.Content += "-1";
-                line.getLine(req.body,function(err,data){
-                    if(err){
-                        console.log(err);
-                        res.end();
-                    }else{
-                        res.end(data);
-                    }
-                });
+            if(flag){
+                var content = req.body.Content.toUpperCase();
+                if(content.indexOf("路") > 0 || content.indexOf("线") > 0)
+                    content = content.slice(0,content.length - 1);
+                if(lines.match(content)){
+                    flag = false;
+                    req.body.Content = content + "-1";
+                    line.getLine(req.body,function(err,data){
+                        if(err){
+                            console.log(err);
+                            res.end();
+                        }else{
+                            res.end(data);
+                        }
+                    });
+                }
             }
             if(flag){
                 station.response(req.body,function(err,data){
