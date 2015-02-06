@@ -96,7 +96,9 @@ Searcher.search = function(json,callback){
                         }
                     });
                 }else{
-                    callback('缓存里没有该用户信息');
+                    var content = "请同意微信上报地理位置信息并重启微信后重试!";
+                    var xml = response.responseText(json,content);
+                    callback(null,xml);
                 }
             }
         });
