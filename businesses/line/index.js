@@ -26,7 +26,7 @@ DaoLine.getLine = function(json,callback){
                 var direct = json.Content.slice(json.Content.indexOf("-") + 1);
                 if(direct == "1"){
                     var station = json.Content.slice(0,json.Content.indexOf("-")) + "-2";
-                    var content = "\ue231<a href='http://120.24.80.233:80/line?station=" + station + "'>" + doc.end + "-" + doc.start + "方向</a>\ue230\n";
+                    var content = "\ue231<a href='http://120.24.80.233:80/line?station=" + station + "'>" + doc.end + "-" + doc.start + "</a>\ue230\n";
                     content += "线路" + json.Content + "(" + doc.start + "-" + doc.end + ")\n";
                     for(var key in doc){
                         if(key != "start" && key != "end"){

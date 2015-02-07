@@ -1,0 +1,19 @@
+body
+{
+	width: 1000px;
+	margin:0 auto;
+	line-height: 30px;
+	font-weight:bold;
+}
+
+p.article
+{
+	text-indent: 2em;
+}
+div.title
+{
+	background-color:#d03d4f;
+	width: 100px;
+	text-align:center;
+	color: white;
+}
