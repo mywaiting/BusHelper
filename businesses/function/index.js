@@ -45,37 +45,37 @@ Function.news = function(json,callback){
         Title:"趣士多连锁店开通岭南通•肇庆通",
         Description:"",
         PicUrl:"",
-        Url:"http://www.zhaoqingbus.com.cn/_d276731868.htm"
+        Url:"http://mp.weixin.qq.com/s?__biz=MjM5NTA1NzM3Mg==&mid=202663902&idx=1&sn=290d22edd3b79f83ebe6b32a27eeced6#rd"
     };
     var item3 = {
         Title:"公交司机对小偷英勇发声：别在我车上闹事",
         Description:"",
         PicUrl:"",
-        Url:"http://www.zhaoqingbus.com.cn/_d276684370.htm"
+        Url:"http://mp.weixin.qq.com/s?__biz=MjM5NTA1NzM3Mg==&mid=202664315&idx=1&sn=38c246e682cd715dec457f87125643e6#rd"
     };
     var item4 = {
         Title:"公交服务用真心  热心助人为快乐",
         Description:"",
         PicUrl:"",
-        Url:"http://www.zhaoqingbus.com.cn/_d276684368.htm"
+        Url:"http://mp.weixin.qq.com/s?__biz=MjM5NTA1NzM3Mg==&mid=202664359&idx=1&sn=554d67214a52f36a20b8b7303c5a766d#rd"
     };
     var item5 = {
         Title:"通告",
         Description:"",
         PicUrl:"",
-        Url:"http://www.zhaoqingbus.com.cn/_d276657718.htm"
+        Url:"http://mp.weixin.qq.com/s?__biz=MjM5NTA1NzM3Mg==&mid=202664418&idx=1&sn=9ba2a5f673566a43d9db26ef8331b775#rd"
     };
     var item6 = {
         Title:"11路线调整通告",
         Description:"",
         PicUrl:"",
-        Url:"http://www.zhaoqingbus.com.cn/_d276622897.htm"
+        Url:"http://mp.weixin.qq.com/s?__biz=MjM5NTA1NzM3Mg==&mid=202664463&idx=1&sn=74532788e1ec386092045368d46a71b1#rd"
     }
     var item7 = {
         Title:"拾金不昧展美德 雷锋精神在公交",
         Description:"",
         PicUrl:"",
-        Url:"http://www.zhaoqingbus.com.cn/_d276619244.htm"
+        Url:"http://mp.weixin.qq.com/s?__biz=MjM5NTA1NzM3Mg==&mid=202664475&idx=1&sn=fe53b072e3bc80676ef812388280092a#rd"
     }
     var content = new Array(item1,item2,item3,item4,item5,item6,item7);
     var xml = response.responseNews(json,content);
