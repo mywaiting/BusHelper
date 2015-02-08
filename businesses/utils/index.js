@@ -70,7 +70,6 @@ function wgs2gcj(json){
 Utils.wgs2bd = function(json){
     json = wgs2gcj(json);
     json = gcj2bd(json);
-    console.log(json);
     return json;
 };
 
