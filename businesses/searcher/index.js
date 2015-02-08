@@ -95,7 +95,7 @@ Searcher.search = function(json,callback){
                         }
                     });
                 }else{
-                    var con = "请同意微信上报地理位置信息并重启微信后重试!";
+                    var con = "请同意微信上报地理位置信息后重试!";
                     var xml = response.responseText(json,con);
                     callback(null,xml);
                 }
@@ -130,7 +130,7 @@ Searcher.currentMap = function(json,callback){
                     var xml = response.responseNews(json,content);
                     callback(null,xml);
                 }else{
-                    callback('缓存里没有该用户信息');
+                    callback('请同意微信上报地理位置信息后重试!');
                 }
             }
         });
@@ -199,7 +199,7 @@ Searcher.direct = function(json,callback){
                         var destination = content.slice(index + 1);
                         requestDirection(json,origin,destination,callback);
                     }else{
-                        callback("缓存里没有该用户信息!");
+                        callback("请同意微信上报地理位置信息后重试!");
                     }
                 }
             });
