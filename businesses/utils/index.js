@@ -143,8 +143,6 @@ Utils.validateToken = function(req,res){
     oriArray[2] = "hello";//这里填写你的token
     oriArray.sort();
     var original = oriArray[0]+oriArray[1]+oriArray[2];
-    console.log("Original Str:"+original);
-    console.log("signature:"+signature);
     var scyptoString = sha1(original);
     if (signature == scyptoString) {
         res.end(echostr);

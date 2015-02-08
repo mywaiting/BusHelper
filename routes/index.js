@@ -24,7 +24,6 @@ router.get('/walkDirection',function(req,res){
     path = path.replace("ORIGIN",origin);
     path = path.replace("DESTINATION",destination);
     path = path.replace("NAME",name);
-    console.log(path);
     return res.redirect(path);
 });
 
@@ -58,7 +57,6 @@ router.get('/line',function(req,res){
 });
 
 router.post('/',function(req, res){
-    console.log(req.body);
     switch(req.body.MsgType){
         case 'event':
             //用户触发事件

@@ -20,7 +20,6 @@ Searcher.responseSearch = function(data,options){
         var destination = data[index].location.lat + "," + data[index].location.lng;
         var purl = path.replace("DESTINATION",destination);
         purl = purl.replace("NAME",data[index].name);
-        console.log(purl);
         var item = {
             Title:data[index].name + ":" + data[index].address,
             Description:"",
@@ -128,7 +127,6 @@ Searcher.currentMap = function(json,callback){
                         Url:path
                     };
                     content.push(item);
-                    console.log(item);
                     var xml = response.responseNews(json,content);
                     callback(null,xml);
                 }else{
@@ -150,7 +148,6 @@ function requestDirection(json,origin,destination,callback){
         path:path,
         method:'GET'
     };
-    console.log(path);
     utils.requestBaidu(options,function(err,str){
         if(err){
             callback(err);
