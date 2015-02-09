@@ -28,10 +28,6 @@ router.get('/walkDirection',function(req,res){
     return res.redirect(path);
 });
 
-router.get('/card',function(req,res){
-    res.render('card');
-});
-
 router.get('/route',function(req,res){
     line.getLineInformation(function(err,data){
         if(err) console.log(err);
