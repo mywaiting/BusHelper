@@ -1,0 +1,30 @@
+.info
+{
+    width: 630px;
+}
+
+.bus
+{
+    float:left;
+    line-height: 105px;
+    height:105px;
+    width:300px;
+}
+
+.img
+{
+    float: left;
+    height: 105px;
+    width: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.station
+{
+    float: right;
+    line-height: 105px;
+    height: 105px;
+    width: 300px;
+    font-size: 20px;
+    font-weight: bold;
+}

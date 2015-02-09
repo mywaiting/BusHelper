@@ -5,6 +5,7 @@ html
     head
         meta(charset='UTF-8')
         meta(name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=no')
+        link(rel='stylesheet' href='../static/line.css')
     body
         div(align="center")
             a(href="http://120.24.80.233/line?station=#{data.station}") #{data.doc.end} - #{data.doc.start}
@@ -13,10 +14,13 @@ html
             br
             each value,key in data.doc
                 if key != "start" && key != "end"
-                    span= key
-                    if value == "1"
-                       img(src='/src/gongjiao.png')
-                    br
+                    div.info
+                        div.bus
+                            if value == "1"
+                                img(src='/src/gongjiao.png')
+                        div.img
+                            img(src='/src/444444.png')
+                        div.station=key
             img(src='/src/gongjiao.png')
             span 表示公交车在该站附近,-1表示下行,-2表示上行.
             br
