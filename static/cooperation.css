@@ -1,6 +1,6 @@
 body
 {
-	width: 800px;
+	width: 95%;
 	margin:0 auto;
 	line-height: 30px;
 	font-weight:bold;
@@ -15,4 +15,8 @@ div.title
 	width: 100px;
 	text-align:center;
 	color: white;
+}
+img
+{
+    max-width: 100%;
 }

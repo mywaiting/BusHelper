@@ -16,6 +16,7 @@ router.get('/',function(req,res){
     utils.validateToken(req,res);
 });
 
+
 router.get('/walkDirection',function(req,res){
     var origin = req.query.origin;
     var destination = req.query.destination;
@@ -32,9 +33,12 @@ router.get('/card',function(req,res){
 });
 
 router.get('/route',function(req,res){
-    var lines = "1,2,3,4,5,5B,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,25B,26,27,28,29,30,31,201,202,203,204,205,K01,K02";
-    var array = lines.split(",");
-    res.render('allLines',{data:array});
+    line.getLineInformation(function(err,data){
+        if(err) console.log(err);
+        else{
+            res.render('allLines',{data:data});
+        }
+    });
 });
 
 router.get('/line',function(req,res){

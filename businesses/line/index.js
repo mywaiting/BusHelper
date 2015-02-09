@@ -5,6 +5,32 @@ var redis = require("redis");
 var response = require("../response");
 function DaoLine(){}
 
+DaoLine.getLineInformation = function(callback){
+    var client = redis.createClient();
+    client.llen("lines",function(err,length){
+        if(err) callback(err);
+        else{
+            client.lrange("lines",0,length - 1,function(err,doc){
+                if(err) callback(err);
+                else{
+                    if(doc){
+                        var array = new Array();
+                        for(var i = 0;i < doc.length;){
+                            var line = {};
+                            line.name = doc[i];
+                            line.start = doc[i + 1];
+                            line.end = doc[i + 2];
+                            i += 3;
+                            array.push(line);
+                        }
+                        callback(null,array);
+                    }
+                }
+            });
+        }
+    });
+}
+
 DaoLine.getAllLine = function(json,callback){
     var lines = "1,2,3,4,5,5B,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,25B,26,27,28,29,30,31,201,202,203,204,205,K01,K02";
     var array = lines.split(",");

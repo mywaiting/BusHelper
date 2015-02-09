@@ -2,9 +2,19 @@
    Created by root on 15-2-6.
 extends layout
 block content
-    div(align="center")
+    div#main(align="center")
+        img(src="../src/1.png")
         each value in data
-            a(href="http://120.24.80.233/line?station=#{value}-1") #{value}路
-            br
+            a(href="http://120.24.80.233/line?station=#{value.name}-1")
+                div.row
+                    div(class="lineNum")
+                        div #{value.name}
+                    div.info
+                        div.station.start #{value.start}
+                        div
+                            img(src="../src/2.png")
+                        div(style="margin-top:20px")
+                            img(src="../src/3.png")
+                        div.station.end #{value.end}
 
 

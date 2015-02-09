@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$" libraries="{BusHelper node_modules}" />
+    <file url="PROJECT" libraries="{BusHelper node_modules, Node.js v0.10.35 Core Modules, gruntjs-DefinitelyTyped}" />
+    <includedPredefinedLibrary name="Node.js Globals" />
   </component>
 </project>
 

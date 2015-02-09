@@ -1,0 +1,59 @@
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#main {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.row {
+    border:6px solid #bbbbbb;
+    width:788px;
+    float: left;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.lineNum
+{
+    display: block;
+    float: left;
+    width: 222px;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 60px;
+    border-right: 6px solid #bbbbbb;
+
+}
+
+a .lineNum {
+    color: red;
+}
+
+.lineNum div {
+    height: 222px;
+    line-height: 222px;
+    vertical-align: middle;
+}
+
+.info {
+    float: left;
+    width: 560px;
+}
+
+.station {
+    height: 40px;
+    font-size: 30px;
+    line-height: 40px;
+    vertical-align: middle;
+}
+
+.start {
+    margin-top: 20px;
+}
+
+.end {
+    margin: 20px 0px 20px 0px;
+}
