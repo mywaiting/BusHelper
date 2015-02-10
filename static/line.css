@@ -1,3 +1,9 @@
+.block
+{
+    border:6px solid #bbbbbb;
+    width:280px;
+}
+
 .info
 {
     width: 280px;
@@ -9,6 +15,7 @@
     line-height: 26px;
     height:26px;
     width:50px;
+    text-align: right;
 }
 
 .img

@@ -14,8 +14,10 @@ html
                 div= data.head
                 div
                     img(src='/src/gongjiao.png')
-                    span 表示公交车在该站附近,-1表示下行,-2表示上行.
-            div
+                    span 表示公交车在该站附近,
+                    br
+                    span -1表示下行,-2表示上行.
+            div.block
                 each value,key in data.doc
                     if key != "start" && key != "end"
                         div.info
