@@ -22,7 +22,7 @@ a {
     width: 222px;
     vertical-align: middle;
     font-weight: bold;
-    font-size: 60px;
+    font-size: 110px;
     border-right: 6px solid #bbbbbb;
 
 }
@@ -44,7 +44,7 @@ a .lineNum {
 
 .station {
     height: 40px;
-    font-size: 30px;
+    font-size: 50px;
     line-height: 40px;
     vertical-align: middle;
 }

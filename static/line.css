@@ -1,6 +1,16 @@
+.url
+{
+    font-size: 23px;
+}
+.line
+{
+    height:2px;
+    width:100%;
+    background:#00CCFF;
+    overflow:hidden;
+}
 .block
 {
-    border:6px solid #bbbbbb;
     width:280px;
 }
 

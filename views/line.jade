@@ -10,13 +10,14 @@ html
         div(align="center")
             div
                 div
-                    a(href="http://120.24.80.233/line?station=#{data.station}") #{data.doc.end} - #{data.doc.start}
+                    a.url(href="http://120.24.80.233/line?station=#{data.station}") 反方向:#{data.doc.end} - #{data.doc.start}
                 div= data.head
                 div
                     img(src='/src/gongjiao.png')
                     span 表示公交车在该站附近,
                     br
                     span -1表示下行,-2表示上行.
+            div.line
             div.block
                 each value,key in data.doc
                     if key != "start" && key != "end"
