@@ -22,8 +22,7 @@ Function.help = function(json,callback){
         "1、即时公交：回复【公交线路名称】(xx)查看该路公交目前位置.\n\n" +
         "2、公交信息：回复【站名】(例如北门)查看经过该站的路线.\n\n" +
         "3、精准导航：回复【xx】(目的地地名)查看当前位置到目的地.\n\n" +
-        "4、便利出行：回复【xx(地名)到xx(地名)】查看出行路线.\n\n" +
-        "4、便利出行：回复【xx(地名)到xx(地名)】查看出行路线";
+        "4、便利出行：回复【xx(地名)到xx(地名)】查看出行路线."
     var xml = response.responseText(json,content);
     callback(xml);
 }

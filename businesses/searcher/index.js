@@ -24,7 +24,7 @@ Searcher.responseSearch = function(data,options){
             Title:data[index].name + ":" + data[index].address,
             Description:"",
             PicUrl:"",
-            Url:purl
+            Url:""
         };
         labels += "|" + data[index].name + labelsstyle;
         markers += "|" + data[index].location.lng + "," + data[index].location.lat;
