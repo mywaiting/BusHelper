@@ -1,20 +1,20 @@
 .info
 {
-    width: 630px;
+    width: 280px;
 }
 
 .bus
 {
     float:left;
-    line-height: 105px;
-    height:105px;
-    width:300px;
+    line-height: 26px;
+    height:26px;
+    width:50px;
 }
 
 .img
 {
     float: left;
-    height: 105px;
+    height: 26px;
     width: 30px;
     margin-left: auto;
     margin-right: auto;
@@ -22,9 +22,10 @@
 .station
 {
     float: right;
-    line-height: 105px;
-    height: 105px;
-    width: 300px;
-    font-size: 20px;
+    text-align: left;
+    line-height: 26px;
+    height: 26px;
+    width: 200px;
+    font-size: 15px;
     font-weight: bold;
 }

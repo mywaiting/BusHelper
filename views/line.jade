@@ -8,20 +8,24 @@ html
         link(rel='stylesheet' href='../static/line.css')
     body
         div(align="center")
-            a(href="http://120.24.80.233/line?station=#{data.station}") #{data.doc.end} - #{data.doc.start}
-            br
-            span= data.head
-            br
-            each value,key in data.doc
-                if key != "start" && key != "end"
-                    div.info
-                        div.bus
-                            if value == "1"
-                                img(src='/src/gongjiao.png')
-                        div.img
-                            img(src='/src/444444.png')
-                        div.station=key
-            img(src='/src/gongjiao.png')
-            span 表示公交车在该站附近,-1表示下行,-2表示上行.
-            br
+            div
+                div
+                    a(href="http://120.24.80.233/line?station=#{data.station}") #{data.doc.end} - #{data.doc.start}
+                div= data.head
+                div
+                    img(src='/src/gongjiao.png')
+                    span 表示公交车在该站附近,-1表示下行,-2表示上行.
+            div
+                each value,key in data.doc
+                    if key != "start" && key != "end"
+                        div.info
+                            div.bus
+                                if value == "1"
+                                    img(src='/src/gongjiao.png')
+                            div.img
+                                img(src='/src/444444.png', height="26px")
+                            div.station=key
+                            div(style="clear:both;")
+
+
 
