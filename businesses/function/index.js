@@ -44,37 +44,37 @@ Function.news = function(json,callback){
         Title:"趣士多连锁店开通岭南通•肇庆通",
         Description:"",
         PicUrl:"",
-        Url:"http://mp.weixin.qq.com/s?__biz=MjM5NTA1NzM3Mg==&mid=202663902&idx=1&sn=290d22edd3b79f83ebe6b32a27eeced6#rd"
+        Url:"http://mp.weixin.qq.com/s?__biz=MzAxNzMyODAyNA==&mid=203688429&idx=1&sn=5aff5c649b0212f41fa3a22573427394#rd"
     };
     var item3 = {
         Title:"公交司机对小偷英勇发声：别在我车上闹事",
         Description:"",
         PicUrl:"",
-        Url:"http://mp.weixin.qq.com/s?__biz=MjM5NTA1NzM3Mg==&mid=202664315&idx=1&sn=38c246e682cd715dec457f87125643e6#rd"
+        Url:"http://mp.weixin.qq.com/s?__biz=MzAxNzMyODAyNA==&mid=203688678&idx=1&sn=be37e3b9fe0a9808dcf24d9b69d3a0e5#rd"
     };
     var item4 = {
         Title:"公交服务用真心  热心助人为快乐",
         Description:"",
         PicUrl:"",
-        Url:"http://mp.weixin.qq.com/s?__biz=MjM5NTA1NzM3Mg==&mid=202664359&idx=1&sn=554d67214a52f36a20b8b7303c5a766d#rd"
+        Url:"http://mp.weixin.qq.com/s?__biz=MzAxNzMyODAyNA==&mid=203688850&idx=1&sn=913594ad0c902db199fdf9f7599426a4#rd"
     };
     var item5 = {
-        Title:"通告",
+        Title:"30路线路延伸至北岭山森林公园通告",
         Description:"",
         PicUrl:"",
-        Url:"http://mp.weixin.qq.com/s?__biz=MjM5NTA1NzM3Mg==&mid=202664418&idx=1&sn=9ba2a5f673566a43d9db26ef8331b775#rd"
+        Url:"http://mp.weixin.qq.com/s?__biz=MzAxNzMyODAyNA==&mid=203688173&idx=1&sn=b4eb5fc1c2ffe4aafb176d0dbbc0d3f3#rd"
     };
     var item6 = {
-        Title:"11路线调整通告",
+        Title:"26路线路延伸至北岭山森林公园通告",
         Description:"",
         PicUrl:"",
-        Url:"http://mp.weixin.qq.com/s?__biz=MjM5NTA1NzM3Mg==&mid=202664463&idx=1&sn=74532788e1ec386092045368d46a71b1#rd"
+        Url:"http://mp.weixin.qq.com/s?__biz=MzAxNzMyODAyNA==&mid=203688313&idx=1&sn=6b12a360917fcd88cc5d5137f7373db5#rd"
     }
     var item7 = {
         Title:"拾金不昧展美德 雷锋精神在公交",
         Description:"",
         PicUrl:"",
-        Url:"http://mp.weixin.qq.com/s?__biz=MjM5NTA1NzM3Mg==&mid=202664475&idx=1&sn=fe53b072e3bc80676ef812388280092a#rd"
+        Url:"http://mp.weixin.qq.com/s?__biz=MzAxNzMyODAyNA==&mid=203689042&idx=1&sn=8e9e918ffb5e64e0636c2784b84b907e#rd"
     }
     var content = new Array(item1,item2,item3,item4,item5,item6,item7);
     var xml = response.responseNews(json,content);

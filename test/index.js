@@ -68,7 +68,7 @@ var line = "<xml>" +
     "<FromUserName><![CDATA[MogHVjngRipVsoxg6TuX3vz6glDg]]></FromUserName>" +
     "<CreateTime>1348831860</CreateTime>" +
     "<MsgType><![CDATA[text]]></MsgType>" +
-    "<Content><![CDATA[9路]]></Content>" +
+    "<Content><![CDATA[1]]></Content>" +
     "<MsgId>1234567890123456</MsgId>" +
     "</xml>";
 
@@ -89,7 +89,7 @@ describe("测试:",function(){
         done();
     });
 
-    describe("测试更新用户位置:",function(){
+    /*describe("测试更新用户位置:",function(){
         it("测试开始:",function(done){
             request.post("/")
                 .set("Content-Type","text/xml")
@@ -100,9 +100,9 @@ describe("测试:",function(){
                     done(err);
                 });
         });
-    });
+    });*/
 
-    describe("测试附近",function(){
+    /*describe("测试附近",function(){
         it("解析xml",function(done){
             request.post("/")
                 .set("Content-Type", "text/xml")
@@ -113,9 +113,9 @@ describe("测试:",function(){
                     done(err);
                 })
         });
-    });
+    });*/
 
-    describe("测试查看附近地图",function(){
+    /*describe("测试查看附近地图",function(){
         it("测试开始",function(done){
             request.post("/")
                 .set("Content-Type","text/xml")
@@ -126,9 +126,9 @@ describe("测试:",function(){
                     done(err);
                 })
         });
-    });
+    });*/
 
-    describe("测试导航:",function(){
+    /*describe("测试导航:",function(){
         it("测试开始",function(done){
            request.post("/")
                .set("Content-Type","text/xml")
@@ -139,9 +139,9 @@ describe("测试:",function(){
                    done(err);
                })
         });
-    });
+    });*/
 
-    describe("测试查询公交站线路:",function(){
+    /*describe("测试查询公交站线路:",function(){
         it("测试开始",function(done){
             request.post("/")
                 .set("Content-Type","text/xml")
@@ -152,7 +152,7 @@ describe("测试:",function(){
                     done(err);
                 })
         });
-    });
+    });*/
 
     describe("测试线路:",function(){
         it("测试开始",function(done){
@@ -166,6 +166,7 @@ describe("测试:",function(){
                 })
         });
     });
+
 
 //    describe("测试查看全部线路:",function(){
 //        it("测试开始",function(done){
