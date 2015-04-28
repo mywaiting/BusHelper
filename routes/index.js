@@ -47,7 +47,6 @@ router.get('/line',function(req,res){
         if((direct == "1" || direct == "2") && lines.match(lineNo)){
             line.getLineByGet(station,function(err,data){
                 if(err){
-                    console.log(err);
                     res.end();
                 }
                 res.render('line',{data:data});
@@ -70,7 +69,6 @@ router.post('/',function(req, res){
                     };
                     json = utils.wgs2bd(json);
                     User.setUser(json,function(err){
-                        if(err) console.log(err);
                         res.end();
                     });
                     break;
@@ -81,7 +79,6 @@ router.post('/',function(req, res){
                             req.body.Content = "附近公交站";
                             searcher.search(req.body,function(err,data){
                                 if(err){
-                                    console.log(err);
                                     res.end();
                                 }else{
                                     res.end(data);
@@ -92,7 +89,6 @@ router.post('/',function(req, res){
                             req.body.Content = "附近美食";
                             searcher.search(req.body,function(err,data){
                                 if(err){
-                                    console.log(err);
                                     res.end();
                                 }else{
                                     res.end(data);
@@ -103,7 +99,6 @@ router.post('/',function(req, res){
                             req.body.Content = "附近超市";
                             searcher.search(req.body,function(err,data){
                                 if(err){
-                                    console.log(err);
                                     res.end();
                                 }else{
                                     res.end(data);
@@ -114,7 +109,6 @@ router.post('/',function(req, res){
                             //用户点击菜单的查看附近地图按钮
                             searcher.currentMap(req.body,function(err,data){
                                 if(err){
-                                   console.log(err);
                                     res.end();
                                 }else{
                                     res.end(data);
@@ -180,7 +174,6 @@ router.post('/',function(req, res){
                 flag = false;
                 searcher.direct(req.body,function(err,data){
                     if(err){
-                        console.log(err);
                         res.end();
                     }else{
                         res.end(data);
@@ -191,7 +184,6 @@ router.post('/',function(req, res){
                 flag = false;
                 searcher.search(req.body,function(err,data){
                     if(err){
-                        console.log(err);
                         res.end();
                     }else{
                         res.end(data);
@@ -207,7 +199,6 @@ router.post('/',function(req, res){
                     req.body.Content = content + "-1";
                     line.getLine(req.body,function(err,data){
                         if(err){
-                            console.log(err);
                             res.end();
                         }else{
                             res.end(data);
@@ -218,7 +209,6 @@ router.post('/',function(req, res){
             if(flag){
                 station.response(req.body,function(err,data){
                     if(err){
-                        console.log(err);
                         res.end();
                     }else{
                         res.end(data);
@@ -227,7 +217,6 @@ router.post('/',function(req, res){
             }
             break;
         default:
-            console.log('error');
             res.end();
             break;
     }
